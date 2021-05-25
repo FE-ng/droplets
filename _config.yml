@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-keywords:
-author: John Doe
-language:
-timezone:
+title: Droplets
+subtitle: frond-end
+description: 用来记录自己工作学习中的收获
+keywords: 前端, react, vue, 博客
+author: FE-ng
+language: ch-zn
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -17,6 +17,7 @@ url: http://yoursite.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
+# permalink: :category/:post_title:id
 
 # Directory
 source_dir: source

@@ -1,0 +1,13 @@
+- class_name: test
+  id_name: test
+  name: widget
+  icon: test
+  order:
+  html:
+
+- class_name: user-map
+  id_name: user-map
+  name: 访客地图
+  icon: fas fa-heartbeat
+  order:
+  html: '<script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=ZKAXNONNi0S5lPF-pnkcIgrucY6UrO2zOxid29sFkis"></script>'
