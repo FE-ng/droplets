@@ -1,6 +1,7 @@
 ---
 title: 武装你的mac
 date: 2021-06-07 15:19:35
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210608112043.png
 categories:
   - mac配置
   - blog
@@ -46,7 +47,7 @@ MacBook 提供了强大的触控板硬件，支持用力点按和多指触控。
 1. 允许来自任意来源的应用
    很多时候，我们需要安装第三方途径的软件包，对于某些软件，苹果会因为过高的安全管理权限而拒绝安装，想要处理，可以在系统的设置内解决。
 
-![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210426141736.png ':class=image800')
+  <img style="width:600px;" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210426141736.png"  alt="效果图" align=center />
 
 如果找不到 “任意来源” 这个选项，可以通过一行终端的命令解决，按住 command + 空格 ，输入 “终端.app” 打开终端。在终端中输入命令：
 
@@ -84,15 +85,15 @@ command + N : 新窗口
 
 ### 通用类
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/apple-touch-icon.png ':class=image30') [Homebrew](https://brew.sh/)
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/apple-touch-icon.png"  alt="效果图" align=center /> [Homebrew](https://brew.sh/)
 
 一款几乎必装的软件包管理工具,只是很多时候由于 GFW 的存在下载的速度堪忧,有必要更换一下国内的源;
-下载之后能够非常简单的按照很多软件
+下载之后能够非常简单的安装很多软件
 
 - ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506191852.png ':class=image30') [chrome](https://www.google.com/intl/zh-CN/chrome/)
   开发人员使用的最多浏览器,不多赘述,好用的插件另起一遍介绍;
 
-  !> [插件传送门](https://docsify-website-lf.vercel.app/#/tools/chromePlugin)
+  > [插件传送门](https://docsify-website-lf.vercel.app/#/tools/chromePlugin)
 
 - ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192359.png ':class=image30') [Paste (强化剪切板)](https://pasteapp.io/)  
    可以将常用的一些操作和内容进行分类重命名储存
