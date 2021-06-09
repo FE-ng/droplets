@@ -100,7 +100,7 @@ command + N : 新窗口
 
   <img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_6b0749fb-d939-4618-8262-64c5b6e4f594.png" style="width:600px;"/>
 
-- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192438.png" alt="icon" align="center"> [iStat Menus （电脑性能监控）](https://bjango.com/mac/istatmenus/)  
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210609194057.png "  alt="效果图" align=center />[iStat Menus （电脑性能监控）](https://bjango.com/mac/istatmenus/)  
    功能非常的强大 能够查看 mac 的各种信息并且支持自定义自己喜欢的表现形式和颜色;  
   <img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210426140334.png" style="width:600px;"/>
 
@@ -108,9 +108,9 @@ command + N : 新窗口
 [^_^]: # (邮箱：982092332@qq.com )
 [^_^]: # (SN：GAWAE-FCWQ3-P8NYB-C7GF7-NEDRT-Q5DTB-MFZG6-6NEQC-CRMUD-8MZ2K-66SRB-SU8EW-EDLZ9-TGH3S-8SGA )
 
-- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192908.png" alt="icon" align="center"> [IINA （推荐的 macOS 视频播放器）](https://iina.io/)
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210609194311.png "  alt="效果图" align=center /> [IINA （推荐的 macOS 视频播放器）](https://iina.io/)
 
-- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506193103.png" alt="icon" align="center"> [hammerspoon](http://www.hammerspoon.org/)  
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210609194344.png "  alt="效果图" align=center />[hammerspoon](http://www.hammerspoon.org/)  
   这是一个用于 OS x 强大自动化的工具。在其核心上，Hammerspoon 只是操作系统和 Lua 脚本引擎之间的桥梁。  
   赋予 Hammerspoon 强大功能的是一组向用户公开系统功能特定部分的扩展。  
   小锤子! 它能做到什么? 可以给 mac 的软件设置开启(切换)的快捷键,可以迅速给当前运行的窗口分屏二分之一屏(三分之一屏幕),  
@@ -134,7 +134,7 @@ command + N : 新窗口
 
   !> [我使用的 zsh 配置](https://github.com/FE-ng/docsify-website/blob/main/.zshrc.md);
 
-- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210512200050.png" alt="icon" align="center"> [vscode](https://code.visualstudio.com/)
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210609194535.png "  alt="效果图" align=center /> [vscode](https://code.visualstudio.com/)
 
   ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210503234003.png ':class=image400')  
   现阶段前端使用最多的 IDE,由微软开发维护,支持非常多的语言,有茫茫多的开发插件和活跃的社区;
