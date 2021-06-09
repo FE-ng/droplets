@@ -90,17 +90,17 @@ command + N : 新窗口
 一款几乎必装的软件包管理工具,只是很多时候由于 GFW 的存在下载的速度堪忧,有必要更换一下国内的源;
 下载之后能够非常简单的安装很多软件
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506191852.png ':class=image30') [chrome](https://www.google.com/intl/zh-CN/chrome/)
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210609193619.png "  alt="效果图" align=center /> [chrome](https://www.google.com/intl/zh-CN/chrome/)
   开发人员使用的最多浏览器,不多赘述,好用的插件另起一遍介绍;
 
   > [插件传送门](https://docsify-website-lf.vercel.app/#/tools/chromePlugin)
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192359.png ':class=image30') [Paste (强化剪切板)](https://pasteapp.io/)  
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192359.png" alt="icon" align="center"> [Paste (强化剪切板)](https://pasteapp.io/)  
    可以将常用的一些操作和内容进行分类重命名储存
 
   <img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_6b0749fb-d939-4618-8262-64c5b6e4f594.png" style="width:600px;"/>
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192438.png ':class=image30') [iStat Menus （电脑性能监控）](https://bjango.com/mac/istatmenus/)  
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192438.png" alt="icon" align="center"> [iStat Menus （电脑性能监控）](https://bjango.com/mac/istatmenus/)  
    功能非常的强大 能够查看 mac 的各种信息并且支持自定义自己喜欢的表现形式和颜色;  
   <img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210426140334.png" style="width:600px;"/>
 
@@ -108,9 +108,9 @@ command + N : 新窗口
 [^_^]: # (邮箱：982092332@qq.com )
 [^_^]: # (SN：GAWAE-FCWQ3-P8NYB-C7GF7-NEDRT-Q5DTB-MFZG6-6NEQC-CRMUD-8MZ2K-66SRB-SU8EW-EDLZ9-TGH3S-8SGA )
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192908.png ':class=image30') [IINA （推荐的 macOS 视频播放器）](https://iina.io/)
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192908.png" alt="icon" align="center"> [IINA （推荐的 macOS 视频播放器）](https://iina.io/)
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506193103.png ':class=image30') [hammerspoon](http://www.hammerspoon.org/)  
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506193103.png" alt="icon" align="center"> [hammerspoon](http://www.hammerspoon.org/)  
   这是一个用于 OS x 强大自动化的工具。在其核心上，Hammerspoon 只是操作系统和 Lua 脚本引擎之间的桥梁。  
   赋予 Hammerspoon 强大功能的是一组向用户公开系统功能特定部分的扩展。  
   小锤子! 它能做到什么? 可以给 mac 的软件设置开启(切换)的快捷键,可以迅速给当前运行的窗口分屏二分之一屏(三分之一屏幕),  
@@ -119,7 +119,7 @@ command + N : 新窗口
 
   !> [这是我的配置](https://github.com/FE-ng/.hammerspoon);
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506193204.png ':class=image30') [Parallels Desktop](https://www.parallels.cn/)  
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506193204.png" alt="icon" align="center"> [Parallels Desktop](https://www.parallels.cn/)  
   官网介绍: 无需重启即可在 Mac（包括新型 Apple M1 芯片）上运行 Windows 的应用程序，  
   同时具有速度更快、操作更简单且功能更强大的优点。包括 30 余种实用工具，可简化 Mac 和 Windows 上的日常任务  
   平时用的不多,不过在 mac 上能够做到不切换系统而使用 windows 必要的时候倒是很方便
@@ -134,18 +134,18 @@ command + N : 新窗口
 
   !> [我使用的 zsh 配置](https://github.com/FE-ng/docsify-website/blob/main/.zshrc.md);
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210512200050.png ':class=image30') [vscode](https://code.visualstudio.com/)
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210512200050.png" alt="icon" align="center"> [vscode](https://code.visualstudio.com/)
 
   ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210503234003.png ':class=image400')  
   现阶段前端使用最多的 IDE,由微软开发维护,支持非常多的语言,有茫茫多的开发插件和活跃的社区;
 
   ?> _TODO_ 这里的插件也需要另起一篇文章介绍
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210512195827.png ':class=image30') [ITerm2](https://iterm2.com/)
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210512195827.png" alt="icon" align="center"> [ITerm2](https://iterm2.com/)
   推荐的终端软件 ( iTerm2 )
   这是一款 macOS 用于替代 终端.app 的软件。因为它的定制化和功能非常强大，所以在配置 mac 的时候，它也会作为我使用的终端应用。
 
-- ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210512200137.png ':class=image30') [SwitchHosts](https://github.com/oldj/SwitchHosts)
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210512200137.png" alt="icon" align="center"> [SwitchHosts](https://github.com/oldj/SwitchHosts)
 
   ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210430172813.png ':class=image400')
 
