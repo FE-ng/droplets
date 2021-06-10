@@ -844,7 +844,8 @@ css_prefix: true
 # 插入代码到头部 </head> 之前 和 底部 </body> 之前
 inject:
   head:
-    - <style type='text/css'></style>
+    # - < type='text/css'></>
+    - <link rel="stylesheet" href="/css/defaultImg.css">
   bottom:
     # - <script src="xxxx"></script>
 
