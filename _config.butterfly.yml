@@ -211,7 +211,7 @@ related_post:
   date_type: created # or created or updated 文章日期顯示創建日或者更新日
 
 # figcaption (圖片描述文字)
-photofigcaption: true
+photofigcaption: false
 
 # post_pagination (分頁)
 # value: 1 || 2 || false
@@ -409,7 +409,7 @@ footer:
   owner:
     enable: true
     since: 2020
-  custom_text:
+  custom_text: welcome to my blog
   copyright: true # Copyright of theme and framework
 
 # Analysis
