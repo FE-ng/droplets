@@ -1,6 +1,6 @@
 - class_name: test
   id_name: test
-  name: widget
+  name: widget测试内容
   icon: test
   order:
   html:
