@@ -1,25 +1,29 @@
-<!--
- * @Author: your name
- * @Date: 2021-05-25 19:49:40
- * @LastEditTime: 2021-05-25 19:49:42
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /droplets/source/_posts/test.md
--->
+---
+title: chrome 插件
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210610131437.png
+categories:
+  - 软件
+tags:
+  - chrome
+  - 插件
+  - 配置
+  - 软件
+---
 
 # chrome 插件推荐
 
 有条件的还是推荐申请一个 chrome 账号  
-账号能够自动保存自己的插件,书签,一次配置终身享受
-
-https://www.crxsoso.com/
+账号能够自动保存自己的插件,书签,一次配置终身享受 同步还是太香了  
+这里也提供几个不用翻墙的下载地址  
+[crx 搜搜](https://www.crxsoso.com/)  
+[极简插件](https://chrome.zzzmh.cn/index#index)
 
 ## 通用型插件
 
 1. ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210505104731.png ':class=image30')[Tampermonkey BETA](https://chrome.google.com/webstore/detail/tampermonkey-beta/gcalenpjmijncebpfijmoaglllgpjagf)  
    红猴子 神器之一 非常强大
 
-   !> [<=================介绍=================>](/tools/tampermonkey.md)
+   > [<=================介绍=================>](/tools/tampermonkey.md)
 
 2. ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210508150102.png ':class=image30') [Chrome Better History](chrome://extensions/?id=egehpkpgpgooebopjihjmnpejnjafefi)
 
@@ -50,7 +54,7 @@ https://www.crxsoso.com/
 
    ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210429134615.png ':class=image400')
 
-   !> 代理神器(懂得都懂) [<=================我的配置=================>](/tools/switchOmega.md)
+   > 代理神器(懂得都懂) [<=================我的配置=================>](/tools/switchOmega.md)
 
 8. ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210508150537.png ':class=image30') [Surfingkeys](https://chrome.google.com/webstore/detail/surfingkeys/gfbliohnnapiefjpjlpjnehglfpaknnc)
 
