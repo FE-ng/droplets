@@ -3,7 +3,7 @@
   name: widget测试内容
   icon: test
   order:
-  html:
+  html: <script type="text/javascript" id="111">document.querySelectorAll('#recent-posts > .recent-post-item .post_cover img.post_bg').forEach(i => i.style.objectFit = 'contain');</script>
 
 - class_name: user-map
   id_name: user-map
