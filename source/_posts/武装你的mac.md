@@ -81,7 +81,7 @@ command + N : 新窗口
 
 ......
 
-## **软件类**
+## **软件类** [xclient mac 软件下载地址推荐](https://xclient.info/)
 
 ### 通用类
 
@@ -95,8 +95,9 @@ command + N : 新窗口
 
   > [插件传送门](https://docsify-website-lf.vercel.app/#/tools/chromePlugin)
 
-- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506192359.png" alt="icon" align="center"> [Paste (强化剪切板)](https://pasteapp.io/)  
-   可以将常用的一些操作和内容进行分类重命名储存
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210610111642.png "  alt="效果图" align=center /> [Paste (强化剪切板)](https://pasteapp.io/)  
+  Paste 极大的丰富了我们剪切板的操作内容  
+  并且支持将常用的一些操作和内容进行分类管理并且储存
 
   <img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_6b0749fb-d939-4618-8262-64c5b6e4f594.png" style="width:600px;"/>
 
@@ -117,35 +118,37 @@ command + N : 新窗口
   更能够在我们使用多屏开发时使用设置好的,将选中的窗口在多个屏幕转移,能够通过预设来切换语言中英文输入法等等等等!异常的强大;  
   只是配置起来稍有门槛,但是社区早已有前辈为我们铺好了道路;
 
-  !> [这是我的配置](https://github.com/FE-ng/.hammerspoon);
+  > [我的 hammerspoon 配置](https://github.com/FE-ng/.hammerspoon);
 
 - <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210506193204.png" alt="icon" align="center"> [Parallels Desktop](https://www.parallels.cn/)  
   官网介绍: 无需重启即可在 Mac（包括新型 Apple M1 芯片）上运行 Windows 的应用程序，  
   同时具有速度更快、操作更简单且功能更强大的优点。包括 30 余种实用工具，可简化 Mac 和 Windows 上的日常任务  
   平时用的不多,不过在 mac 上能够做到不切换系统而使用 windows 必要的时候倒是很方便
 
-- [Aerial]()
-  一款炫酷的 mac 屏保软件,内置了其他高清 4K 的屏保动效,
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210610111132.png "  alt="效果图" align=center />[Aerial](https://aerialscreensaver.github.io/)
+  Aerial 是 macOS 的一款屏保软件，可以设置来自苹果 tvOS 屏幕保护程序的视频。  
+  包括在不同城市和地点(纽约，旧金山，中国…)拍摄的经典航拍视频，国际空间站的地球视频，以及 tvOS 13 中介绍的新水下视频。  
+  从 2.0 版，还可以设置来自第三方分享的或自己的视频.
 
 ### 开发类
 
-- [Zsh](https://ohmyz.sh/) Shell  
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210610112024.png "  alt="效果图" align=center />[Zsh Shell](https://ohmyz.sh/)  
   Oh-my-zsh 是一个开源的、基于社区驱动的框架，用于管理 Zsh 配置。它拥有非常多的功能，辅助，插件，主题,使用起来非常的便捷;
 
-  !> [我使用的 zsh 配置](https://github.com/FE-ng/docsify-website/blob/main/.zshrc.md);
+  > [我的 zsh 配置](https://github.com/FE-ng/docsify-website/blob/main/.zshrc.md);
 
 - <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210609194535.png "  alt="效果图" align=center /> [vscode](https://code.visualstudio.com/)
 
   ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210503234003.png ':class=image400')  
   现阶段前端使用最多的 IDE,由微软开发维护,支持非常多的语言,有茫茫多的开发插件和活跃的社区;
 
-  ?> _TODO_ 这里的插件也需要另起一篇文章介绍
+  > _TODO_ 这里的插件也需要另起一篇文章介绍
 
 - <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210512195827.png" alt="icon" align="center"> [ITerm2](https://iterm2.com/)
   推荐的终端软件 ( iTerm2 )
   这是一款 macOS 用于替代 终端.app 的软件。因为它的定制化和功能非常强大，所以在配置 mac 的时候，它也会作为我使用的终端应用。
 
-- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210512200137.png" alt="icon" align="center"> [SwitchHosts](https://github.com/oldj/SwitchHosts)
+- <img style="width:30px; display: inline-block" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210610111012.png "  alt="效果图" align=center /> [SwitchHosts](https://swh.app/zh/)
 
   ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210430172813.png ':class=image400')
 
