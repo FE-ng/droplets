@@ -48,3 +48,5 @@ killall SlowQuitApps
 
 { "key": "cmd+q", "command": "-workbench.action.quit", "when": "isMac" },
 { "key": "cmd+q cmd+q", "command": "workbench.action.quit", "when": "isMac" },
+
+[hexo butterfly 配置参考](https://www.yuandongbin.site/2019/12/08/butterfly%E4%B8%BB%E9%A2%98/)
