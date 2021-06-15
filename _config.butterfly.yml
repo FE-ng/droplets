@@ -818,7 +818,7 @@ pangu:
 lazyload:
   enable: true
   field: site # site/post
-  placeholder: loading...
+  placeholder: /images/loading.gif
   blur: true
 
 # PWA
@@ -848,6 +848,7 @@ inject:
     - <link rel="stylesheet" href="/css/defaultImg.css">
   bottom:
     # - <script src="xxxx"></script>
+    - <script src="/js/myJs.js"></script>
 
 # CDN
 # Don't modify the following settings unless you know how they work
