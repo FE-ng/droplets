@@ -12,3 +12,45 @@
 .image800 {
   width: 800px;
 }
+
+.btn {
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  animation: animate 8s linear infinite;
+}
+
+.btn::before {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  z-index: -1;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 18px;
+  opacity: 0;
+  transition: 0.5s;
+  content: '';
+}
+
+.btn:hover::before {
+  opacity: 1;
+  filter: blur(10px);
+  animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
