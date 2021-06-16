@@ -81,12 +81,13 @@ https://www.antmoe.com/posts/3b43914f/
 支持的语言包括：c, abnf, accesslog, actionscript, ada, apache, applescript, arduino, armasm, asciidoc, aspectj, autohotkey, autoit, avrasm, awk, axapta, bash, basic, bnf, brainfuck, cal, capnproto, ceylon, clean, clojure, clojure-repl, cmake, coffeescript, coq, cos, cpp, crmsh, crystal, cs, csp, css, d, dart, delphi, diff, django, dns, dockerfile, dos, dsconfig, dts, dust, ebnf, elixir, elm, erb, erlang, erlang-repl, excel, fix, flix, fortran, fsharp, gams, gauss, gcode, gherkin, glsl, go, golo, gradle, groovy, haml, handlebars, haskell, haxe, hsp, htmlbars, http, hy, inform7, ini, irpf90, java, javascript, json, julia, kotlin, lasso, ldif, leaf, less, lisp, livecodeserver, livescript, llvm, lsl, lua, makefile, markdown, mathematica, matlab, maxima, mel, mercury, mipsasm, mizar, mojolicious, monkey, moonscript, n1ql, nginx, nimrod, nix, nsis, objectivec, ocaml, openscad, oxygene, parser3, perl, pf, php, pony, powershell, processing, profile, prolog, protobuf, puppet, purebasic, python, q, qml, r, rib, roboconf, rsl, ruby, ruleslanguage, rust, scala, scheme, scilab, scss, smali, smalltalk, sml, sqf, sql, stan, stata, step21, stylus, subunit, swift, taggerscript, tap, tcl, tex, thrift, tp, twig, typescript, vala, vbnet, vbscript, vbscript-html, verilog, vhdl, vim, x86asm, xl, xml, xquery, yaml, zephir。
 
 [hexo butterfly 配置参考](https://www.yuandongbin.site/2019/12/08/butterfly%E4%B8%BB%E9%A2%98/)
-https://jakelin.cn/hexo/Hexo-Theme-Butterfly(%E4%B8%89)-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/
-
-[Butterfly 主题的美化](https://blog.imzjw.cn/posts/b74f504f/)
-https://zhuanlan.zhihu.com/p/35668237
-
+[JakeLin's Blog](<https://jakelin.cn/hexo/Hexo-Theme-Butterfly(%E4%B8%89)-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/>)
+[Butterfly 主题的美化 imzjw](https://blog.imzjw.cn/posts/b74f504f/)
 [外挂标签](https://akilar.top/posts/615e2dec/)
+[双栏布局](https://zfe.space/post/hexo-butterfly-article-double-row.html)
+[合集](https://butterfly.js.org/posts/7670b080/)
+https://zhuanlan.zhihu.com/p/35668237
+https://sixdegree.github.io/2016/01/02/Hexo.html
 
 hexo clean & hexo g & hexo s
 
