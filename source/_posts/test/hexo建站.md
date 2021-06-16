@@ -1,6 +1,6 @@
 ---
 title: hexo 内置设置
-# cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210608112043.png
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210616113545.png
 tags:
   - 常用
   - 内置设置
@@ -82,3 +82,5 @@ https://www.antmoe.com/posts/3b43914f/
 
 [hexo butterfly 配置参考](https://www.yuandongbin.site/2019/12/08/butterfly%E4%B8%BB%E9%A2%98/)
 https://jakelin.cn/hexo/Hexo-Theme-Butterfly(%E4%B8%89)-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/
+
+[Butterfly 主题的美化](https://blog.imzjw.cn/posts/b74f504f/)
