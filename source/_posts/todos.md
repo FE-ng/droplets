@@ -37,8 +37,6 @@ tags:
 23. > ~~icon 除黑白边~~
 24. > vscode 插件补充
 
-https://zhuanlan.zhihu.com/p/35668237
-
 defaults write com.dteoh.SlowQuitApps whitelist -array-add com.microsoft.VSCode
 
 defaults read com.dteoh.SlowQuitApps whitelist

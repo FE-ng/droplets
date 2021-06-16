@@ -84,3 +84,10 @@ https://www.antmoe.com/posts/3b43914f/
 https://jakelin.cn/hexo/Hexo-Theme-Butterfly(%E4%B8%89)-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/
 
 [Butterfly 主题的美化](https://blog.imzjw.cn/posts/b74f504f/)
+https://zhuanlan.zhihu.com/p/35668237
+
+[外挂标签](https://akilar.top/posts/615e2dec/)
+
+hexo clean & hexo g & hexo s
+
+<!-- {% link 标题, 链接, 图片链接（可选） %} -->
