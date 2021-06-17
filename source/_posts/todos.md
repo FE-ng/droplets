@@ -145,3 +145,50 @@ git checkout origin another_branch returns error in most cases. If origin is a r
 git checkout origin/another_branch succeeds if origin/another_branch exists. It leads to be in detached HEAD state, not on any branch. If you make new commits, the new commits are not reachable from any existing branches and none of the branches will be updated.
 
 2.
+
+```javascript
+// 闭包的应用
+function zero(fn) {
+  return fn !== undefined ? fn(0) : 0;
+}
+function one(fn) {
+  return fn !== undefined ? fn(1) : 1;
+}
+function two(fn) {
+  return fn !== undefined ? fn(2) : 2;
+}
+function three(fn) {
+  return fn !== undefined ? fn(3) : 3;
+}
+function four(fn) {
+  return fn !== undefined ? fn(4) : 4;
+}
+function five(fn) {
+  return fn !== undefined ? fn(5) : 5;
+}
+function six(fn) {
+  return fn !== undefined ? fn(6) : 6;
+}
+function seven(fn) {
+  return fn !== undefined ? fn(7) : 7;
+}
+function eight(fn) {
+  return fn !== undefined ? fn(8) : 8;
+}
+function nine(fn) {
+  return fn !== undefined ? fn(9) : 9;
+}
+
+function plus(fn) {
+  return (num) => num + fn;
+}
+function minus(fn) {
+  return (num) => num - fn;
+}
+function times(fn) {
+  return (num) => num * fn;
+}
+function dividedBy(fn) {
+  return (num) => ~~(num / fn);
+}
+```
