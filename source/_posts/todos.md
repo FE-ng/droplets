@@ -192,3 +192,5 @@ function dividedBy(fn) {
   return (num) => ~~(num / fn);
 }
 ```
+
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210618160630.png"  alt="效果图" />
