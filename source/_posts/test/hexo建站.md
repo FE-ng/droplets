@@ -89,6 +89,8 @@ https://www.antmoe.com/posts/3b43914f/
 https://zhuanlan.zhihu.com/p/35668237
 https://sixdegree.github.io/2016/01/02/Hexo.html
 
+[github 首页装饰](https://cxvh.com/2021/02/14/git/READEME/)
+
 hexo clean & hexo g & hexo s
 
 <!-- {% link 标题, 链接, 图片链接（可选） %} -->
