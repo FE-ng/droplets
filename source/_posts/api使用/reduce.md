@@ -95,23 +95,6 @@ function Count(arr = []) {
 }
 ```
 
-### 数组扁平化
-
-```javascript
-const numArr = [1, [2, [3, [4, 5]]], 6, [[[1, 2]], [3, 4]]];
-const flatArr = (arr) => {
-  return arr.reduce((pre, cur) => {
-    return pre.concat(Array.isArray(cur) ? flatArr(cur) : cur);
-  }, []);
-};
-console.log(flatArr(numArr)); // [1, 2, 3, 4, 5, 6, 1, 2, 3, 4]
-```
-
-遇见数组扁平化的时候 还会有很多种方法
-{% note info modern %}
-task: 提供单独的一篇数组扁平的方法总结
-{% endnote %}
-
 ### 权重求和
 
 ```javascript
@@ -121,50 +104,6 @@ const scores = [
   { score: 85, subject: 'english', weight: 0.2 },
 ];
 const result = scores.reduce((t, v) => t + v.score * v.weight, 0); // 91.5
-```
-
-### 代替 reverse
-
-```javascript
-// 使用reduceRight 以及','号运算符
-function Reverse1(arr = []) {
-  /* 
-  (prev, cur) => (prev.push(cur), prev) 相当于
-  (prev, cur) => {
-    prev.push(cur);
-    return prev
-  }
-  */
-  return arr.reduceRight((prev, cur) => (prev.push(cur), prev), []);
-}
-
-// 逗号运算符有时让人难以理解,因此我一般借用代码的表达含义 即:每次返回之前的prev内容加cur当前值
-function Reverse2(arr = []) {
-  return arr.reduceRight((prev, cur) => [...prev, cur], []);
-}
-
-// 当然reduce也能实现对比Reverse2我们只需要在处理返回值的时候将cur放置在prev之前即可
-function Reverse3(arr = []) {
-  return arr.reduce((prev, cur) => [cur, ...prev], []);
-}
-```
-
-### 代替 map 和 filter
-
-```javascript
-const arr = [0, 1, 2, 3];
-
-// 代替map：[0, 2, 4, 6]
-const a = arr.map((cur) => cur * 2);
-const b = arr.reduce((prev, cur) => [...prev, cur * 2], []);
-
-// 代替filter：[2, 3]
-const c = arr.filter((cur) => cur > 1);
-const d = arr.reduce((prev, cur) => (cur > 1 ? [...prev, cur] : prev), []);
-
-// 代替map和filter：[4, 6]
-const e = arr.map((cur) => cur * 2).filter((cur) => cur > 2);
-const f = arr.reduce((prev, cur) => (cur * 2 > 2 ? [...prev, cur * 2] : prev), []);
 ```
 
 ### 数组分割
@@ -177,43 +116,6 @@ function Chunk(arr = [], size = 1) {
 }
 const arr = [1, 2, 3, 4, 5];
 Chunk(arr, 2); // [[1, 2], [3, 4], [5]]
-```
-
-### 数组过滤
-
-```javascript
-function Difference(arr = [], carr = []) {
-  return arr.reduce((t, v) => (!carr.includes(v) && t.push(v), t), []);
-}
-const arr1 = [1, 2, 3, 4, 5];
-const arr2 = [2, 3, 6];
-Difference(arr1, arr2); // [1, 4, 5]
-```
-
-### 数组去重
-
-```javascript
-function Uniq(arr = []) {
-  return arr.reduce((t, v) => (t.includes(v) ? t : [...t, v]), []);
-}
-
-const arr = [2, 1, 0, 3, 2, 1, 2];
-Uniq(arr); // [2, 1, 0, 3]
-```
-
-### 数组最大最小值
-
-```javascript
-function Max(arr = []) {
-  return arr.reduce((t, v) => (t > v ? t : v));
-}
-
-function Min(arr = []) {
-  return arr.reduce((t, v) => (t < v ? t : v));
-}
-const arr = [12, 45, 21, 65, 38, 76, 108, 43];
-Max(arr); // 108
-Min(arr); // 12
 ```
 
 ### 数组成员位置记录
@@ -314,13 +216,7 @@ const map = people.reduce((t, v) => {
 }, {}); // { YZW: {…}, TYJ: {…} }
 ```
 
-### 取子集
-
-```javascript
-[1, 2, 3, 4, 5, 6].reduce((t, item) => t.concat(t.map((v) => v.concat(item))), [[]]);
-```
-
-### Redux Compose 函数原理
+### Redux Compose 原理
 
 ```javascript
 function Compose(...fns) {
@@ -351,6 +247,177 @@ async function AsyncTotal(arr = []) {
 }
 const result = await AsyncTotal(); // 需要在async包围下使用
 ```
+
+## 强行 reduce
+
+### 数组扁平化
+
+```javascript
+const numArr = [1, [2, [3, [4, 5]]], 6, [[[1, 2]], [3, 4]]];
+const flatArr = (arr) => {
+  return arr.reduce((pre, cur) => {
+    return pre.concat(Array.isArray(cur) ? flatArr(cur) : cur);
+  }, []);
+};
+console.log(flatArr(numArr)); // [1, 2, 3, 4, 5, 6, 1, 2, 3, 4]
+```
+
+遇见数组扁平化的时候 还会有很多种方法
+{% note info modern %}
+task: 提供单独的一篇数组扁平的方法总结
+{% endnote %}
+
+### 代替 Array.reverse
+
+```javascript
+// 使用reduceRight 以及','号运算符
+function Reverse1(arr = []) {
+  /* 
+  (prev, cur) => (prev.push(cur), prev) 相当于
+  (prev, cur) => {
+    prev.push(cur);
+    return prev
+  }
+  */
+  return arr.reduceRight((prev, cur) => (prev.push(cur), prev), []);
+}
+
+// 逗号运算符有时让人难以理解,因此我一般借用代码的表达含义 即:每次返回之前的prev内容加cur当前值
+function Reverse2(arr = []) {
+  return arr.reduceRight((prev, cur) => [...prev, cur], []);
+}
+
+// 当然reduce也能实现对比Reverse2我们只需要在处理返回值的时候将cur放置在prev之前即可
+function Reverse3(arr = []) {
+  return arr.reduce((prev, cur) => [cur, ...prev], []);
+}
+```
+
+### 代替 map 和 filter
+
+```javascript
+const arr = [0, 1, 2, 3];
+
+// 代替map：[0, 2, 4, 6]
+const a = arr.map((cur) => cur * 2);
+const b = arr.reduce((prev, cur) => [...prev, cur * 2], []);
+
+// 代替filter：[2, 3]
+const c = arr.filter((cur) => cur > 1);
+const d = arr.reduce((prev, cur) => (cur > 1 ? [...prev, cur] : prev), []);
+
+// 代替map和filter：[4, 6]
+const e = arr.map((cur) => cur * 2).filter((cur) => cur > 2);
+const f = arr.reduce((prev, cur) => (cur * 2 > 2 ? [...prev, cur * 2] : prev), []);
+```
+
+### 数组过滤
+
+```javascript
+function Difference(arr = [], carr = []) {
+  return arr.reduce((t, v) => (!carr.includes(v) && t.push(v), t), []);
+}
+const arr1 = [1, 2, 3, 4, 5];
+const arr2 = [2, 3, 6];
+Difference(arr1, arr2); // [1, 4, 5]
+```
+
+### 数组去重
+
+```javascript
+function Uniq(arr = []) {
+  return arr.reduce((t, v) => (t.includes(v) ? t : [...t, v]), []);
+}
+
+const arr = [2, 1, 0, 3, 2, 1, 2];
+Uniq(arr); // [2, 1, 0, 3]
+```
+
+### 数组最大最小值
+
+```javascript
+function Max(arr = []) {
+  return arr.reduce((t, v) => (t > v ? t : v));
+}
+
+function Min(arr = []) {
+  return arr.reduce((t, v) => (t < v ? t : v));
+}
+const arr = [12, 45, 21, 65, 38, 76, 108, 43];
+Max(arr); // 108
+Min(arr); // 12
+```
+
+## amazing
+
+### 取子集
+
+```javascript
+[1, 2, 3, 4, 5, 6].reduce((t, item) => t.concat(t.map((v) => v.concat(item))), [[]]);
+```
+
+## 实际应用
+
+### 生成 antd 中的 table columns
+
+```typescript
+const columns = () =>
+  Object.keys(TABLE_COL).reduceRight(
+    (pre: ColumnsType, next: string) => [
+      {
+        title: intl.formatMessage(tableCol_searchBar_msg[next]),
+        width: 100,
+        key: next,
+        dataIndex: next,
+        render: TABLE_COL[next] || ((val: unknown) => val ?? '-'),
+      },
+      ...pre,
+    ],
+    [
+      {
+        title: intl.formatMessage(globalMessages.operate),
+        width: 100,
+        dataIndex: 'action',
+        key: 'action',
+        fixed: 'right',
+        render: (_value: unknown, row: ITimeRuleItem) => (
+          <>
+            <TableButton onClick={() => openRulesModal(VIEW, row)}>
+              {intl.formatMessage(globalMessages.detail)}
+            </TableButton>
+            <TableButton onClick={() => openRulesModal(EDIT, row)}>
+              {intl.formatMessage(globalMessages.edit)}
+            </TableButton>
+          </>
+        ),
+      },
+    ],
+  );
+```
+
+这是一段 tsx 代码目的是为了通过简单的配置 TABLE_COL 来生成 antd 中的 table columns;  
+本来只是简单的 reduce 就能完成 但问题需要在最后添加一列操作栏;  
+实际上使用 reduce 然后 push 一列进入数组也是能够达到目的的;  
+但那怎么能优雅呢 所以!如何把第一个默认元素成为最后一个元素?  
+reduceRight!YES!  
+问题又来了 那不是需要我把 TABLE_COL 对象里的每一个属性都倒过来才能按照正确的顺序渲染么?  
+兽人永不为奴!
+
+```typescript
+  (pre: ColumnsType, next: string) => [
+    {
+      title: intl.formatMessage(tableCol_searchBar_msg[next]),
+      width: 100,
+      key: next,
+      dataIndex: next,
+      render: TABLE_COL[next] || ((val: unknown) => val ?? '-'),
+    },
+    ...pre,
+  ],
+```
+
+只需要将遍历的元素在代码里面再倒回去就 OK 了  
+所以很简洁 nice!
 
 参考文献:
 
