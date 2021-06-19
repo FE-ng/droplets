@@ -155,8 +155,17 @@ tags:
     <img class="image800" alt="光标与点按" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/PullRequest-VSC.gif" />
 35. <img class="iconPick" alt="光标与点按" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210521150740.png" /> [koroFileHeader](https://marketplace.visualstudio.com/items?itemName=OBKoro1.korofileheader)  
      obkoro1.korofileheader
+
     - 可拓展性强
     - 头部添加注释: ctrl+cmd+i
     - 在光标处添加函数注释: ctrl+cmd+t
     - 支持一键添加佛祖保佑永无 BUG、神兽护体等注释图案(哎 就是玩) ctrl+cmd+j  
       <img class="image800" alt="光标与点按" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/example.gif" />
+
+36. <img class="iconPick" alt="光标与点按" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210521150740.png" /> [search-node-modules](https://marketplace.visualstudio.com/items?itemName=jasonnutter.search-node-modules)  
+    jasonnutter.search-node-modules
+    node_modules 模块里面的文件夹和模块实在是太多了，寻找某些依赖库代码时非常困难。  
+    安装 Search node_modules 这个插件后，  
+    输入快捷键「Cmd + Shift + P」，然后输入 node_modules，  
+    在弹出的选项中选择 Search node_modules，即可搜索 node_modules 里的模块。
+    <img class="image800" alt="光标与点按" src="https://raw.githubusercontent.com/jasonnutter/vscode-search-node-modules/master/img/demo.gif" />
