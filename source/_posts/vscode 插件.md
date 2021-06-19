@@ -169,3 +169,5 @@ tags:
     输入快捷键「Cmd + Shift + P」，然后输入 node_modules，  
     在弹出的选项中选择 Search node_modules，即可搜索 node_modules 里的模块。
     <img class="image800" alt="光标与点按" src="https://raw.githubusercontent.com/jasonnutter/vscode-search-node-modules/master/img/demo.gif" />
+
+[vscode 相关配置](https://juejin.cn/post/6844903826063884296)
