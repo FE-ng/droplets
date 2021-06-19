@@ -36,7 +36,8 @@ tags:
 22. > ~~github 个人首页装饰(数据统计 仓库)~~ 待更换样式
 23. > ~~icon 除黑白边~~
 24. > vscode 插件补充
-25. > github action CI/CD
+25. > github action CI/CD [自动化发布 npm 包及生成 Github Changelog
+    > ](https://banyudu.com/posts/auto_publish_npm_and_generate_github_changelog.882513)
 
 defaults write com.dteoh.SlowQuitApps whitelist -array-add com.microsoft.VSCode
 
