@@ -196,3 +196,38 @@ function dividedBy(fn) {
 ```
 
 <img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210618160630.png"  alt="效果图" />
+
+```javascript
+function nextSmaller(n) {
+  const [firstN, ...restN] = String(n).split('').map(Number);
+  const arr = [...restN].sort();
+  arr.unshift(firstN);
+  if (String(n) === arr.join('')) {
+    if (Math.min(...restN) >= firstN) return -1;
+    if (Math.min(...restN) === 0) {
+      const secN = [...new Set(restN)].sort()[1] || 0;
+      if (firstN <= secN) return -1;
+      return +(
+        secN +
+        restN
+          .join('')
+          .replace(secN, firstN)
+          .split('')
+          .sort((a, b) => b - a)
+          .join('')
+      );
+    } else {
+      return +(
+        Math.min(...restN) +
+        restN
+          .join('')
+          .replace(Math.min(...restN), firstN)
+          .split('')
+          .sort((a, b) => b - a)
+          .join('')
+      );
+    }
+  }
+  return +arr.join('');
+}
+```
