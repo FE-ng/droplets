@@ -60,7 +60,7 @@ Array.reduceRight((prev, cur, index, arr) => {}, initValue);
 
 基本上平时需要使用 map 等迭代方法进行的 reduce 都能胜任 因此可以衍生出很多用法
 
-### 累加求和&累乘求和
+### 累加|累乘求和
 
 ```javascript
 const arr = [1, 2, 3, 4, 5, 6, 7];
@@ -418,6 +418,8 @@ reduceRight!YES!
 
 只需要将遍历的元素在代码里面再倒回去就 OK 了  
 所以很简洁 nice!
+
+---
 
 参考文献:
 
