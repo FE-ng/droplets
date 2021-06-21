@@ -88,7 +88,7 @@ https://www.antmoe.com/posts/3b43914f/
 [合集](https://butterfly.js.org/posts/7670b080/)
 https://zhuanlan.zhihu.com/p/35668237
 https://sixdegree.github.io/2016/01/02/Hexo.html
-
+https://vincentqin.tech/posts/build-a-website-using-hexo/
 [github 首页装饰](https://cxvh.com/2021/02/14/git/READEME/)
 
 hexo clean & hexo g & hexo s
