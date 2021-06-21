@@ -29,14 +29,16 @@ tags:
 15. > oneTab 中的页面处理
 16. > juejin 收藏的理解消化
 17. > 微信收藏理解总结
-18. > lerna
-19. > 算法 数据结构
-20. > ~~blog 增加评论功能~~
-21. > ~~首页 loading 效果更改~~
-22. > ~~github 个人首页装饰(数据统计 仓库)~~ 待更换样式
-23. > ~~icon 除黑白边~~
-24. > vscode 插件补充
-25. > github action CI/CD [自动化发布 npm 包及生成 Github Changelog
+18. > bilibili 总结
+19. > 收藏夹|阅读清单处理
+20. > lerna
+21. > 算法 数据结构
+22. > ~~blog 增加评论功能~~
+23. > ~~首页 loading 效果更改~~
+24. > ~~github 个人首页装饰(数据统计 仓库)~~ 待更换样式
+25. > ~~icon 除黑白边~~
+26. > vscode 插件补充
+27. > github action CI/CD [自动化发布 npm 包及生成 Github Changelog
     > ](https://banyudu.com/posts/auto_publish_npm_and_generate_github_changelog.882513)
 
 defaults write com.dteoh.SlowQuitApps whitelist -array-add com.microsoft.VSCode
@@ -231,3 +233,5 @@ function nextSmaller(n) {
   return +arr.join('');
 }
 ```
+
+[async pool promise](https://juejin.cn/post/6976028030770610213?utm_source=gold_browser_extension)
