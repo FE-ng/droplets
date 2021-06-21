@@ -162,12 +162,17 @@ tags:
     - 支持一键添加佛祖保佑永无 BUG、神兽护体等注释图案(哎 就是玩) ctrl+cmd+j  
       <img class="image800" alt="光标与点按" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/example.gif" />
 
-36. <img class="iconPick" alt="光标与点按" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210521150740.png" /> [search-node-modules](https://marketplace.visualstudio.com/items?itemName=jasonnutter.search-node-modules)  
+36. <img class="iconPick" alt="光标与点按" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210621144250.png" /> [search-node-modules](https://marketplace.visualstudio.com/items?itemName=jasonnutter.search-node-modules)  
     jasonnutter.search-node-modules
     node_modules 模块里面的文件夹和模块实在是太多了，寻找某些依赖库代码时非常困难。  
     安装 Search node_modules 这个插件后，  
     输入快捷键「Cmd + Shift + P」，然后输入 node_modules，  
     在弹出的选项中选择 Search node_modules，即可搜索 node_modules 里的模块。
     <img class="image800" alt="光标与点按" src="https://raw.githubusercontent.com/jasonnutter/vscode-search-node-modules/master/img/demo.gif" />
+37. <img class="iconPick" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210621143412.png"  alt="效果图" /> [Polacode-xiaobaozi](https://marketplace.visualstudio.com/items?itemName=xiaobaozi.Polacode-xiaobaozi)  
+     快速生成漂亮的代码截图，用于在网上写博客、教程时快速插入代码示例图。  
+     在原版 Polacode 上新增了 mac 坐上角三点，对代码截图进行了美化  
+     按下你键盘的 F1 或者 Ctrl+Shift+P，然后搜索 polacode 或者 xiaobaozi 进行后续操作  
+    <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210621143830.png"  alt="效果图" />
 
 [vscode 相关配置](https://juejin.cn/post/6844903826063884296)
