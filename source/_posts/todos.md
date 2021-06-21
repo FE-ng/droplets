@@ -237,3 +237,5 @@ function nextSmaller(n) {
 [async pool promise](https://juejin.cn/post/6976028030770610213?utm_source=gold_browser_extension)
 
 <img class="iconPick" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210621144901.png"  alt="效果图" />
+
+[用户行为回溯](https://www.rrweb.io/)
