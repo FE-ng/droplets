@@ -1,6 +1,7 @@
 ---
 title: mac 终端常用命令
 cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210608112043.png
+date: 2021-06-19 15:24:45
 categories:
   - mac配置
   - blog

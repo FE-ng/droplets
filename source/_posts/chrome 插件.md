@@ -1,6 +1,7 @@
 ---
 title: chrome 插件
 cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210610131437.png
+date: 2021-06-10 13:21:09
 categories:
   - 软件
 tags:

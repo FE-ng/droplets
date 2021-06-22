@@ -1,6 +1,7 @@
 ---
 title: mono-repo VS multi-repo
 cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210622140117.png
+date: 2021-06-22 15:34:35
 categories:
   - git
 tags:
