@@ -1,6 +1,7 @@
 ---
 title: forEach
 cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210616113743.png
+date: 2021-06-21 13:23:12
 categories:
   - javascript
 tags:
