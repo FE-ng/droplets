@@ -8,6 +8,8 @@ tags:
   - npm
 ---
 
+用于自定义构建 npm init
+
 ```javascript
 var fs = require('fs'),
   path = require('path'),
