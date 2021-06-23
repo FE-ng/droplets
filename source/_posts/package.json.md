@@ -101,6 +101,165 @@ version 字段必须是可以被 (node-semver)[https://github.com/npm/node-semve
 简写形式:
 `Barney Rubble b@rubble.com (http://barnyrubble.tumblr.com/)`
 
+### files
+
+"files"属性的值是一个格式是文件正则的数组，内容是模块下文件名或者文件夹名，  
+如果是文件夹名，则文件夹下所有的文件也会被包含进来（除非文件被另一些配置排除了）;  
+npm 包作为依赖安装时要包括的文件，，["*"] 代表所有文件。
+也可以使用 npmignore 来忽略个别文件。 files 字段优先级最大，不会被 npmignore 和.gitignore 覆盖。
+
+### main
+
+main 属性指定了程序的主入口文件。  
+意思是，如果你的模块被命名为 foo，用户安装了这个模块并通过 require("foo")来使用这个模块，  
+那么 require 返回的内容就是 main 属性指定的文件中 module.exports 指向的对象。  
+它应该指向模块根目录下的一个文件。对大对数模块而言，这个属性更多的是让模块有一个主入口文件，然而很多模块并不写这个属性。
+
+### bin
+
+很多模块有一个或多个需要配置到 PATH 路径下的可执行模块，  
+npm 让这个工作变得十分简单（实际上 npm 本身也是通过 bin 属性安装为一个可执行命令的）  
+如果要用 npm 的这个功能，在 package.json 里边配置一个 bin 属性。
+bin 属性是一个已命令名称为 key，本地文件名称为 value 的 map 如下：
+
+```json
+{ "bin": { "myapp": "./cli.js" } }
+```
+
+模块安装的时候，若是全局安装，则 npm 会为 bin 中配置的文件在 bin 目录下创建一个软连接  
+（对于 windows 系统，默认会在 C:\Users\username\AppData\Roaming\npm 目录下），  
+若是局部安装，则会在项目内的./node_modules/.bin/目录下创建一个软链接。  
+因此，按上面的例子，当你安装 myapp 的时候，npm 就会为 cli.js 在/usr/local/bin/myapp 路径创建一个软链接。  
+如果你的模块只有一个可执行文件，并且它的命令名称和模块名称一样，你可以只写一个字符串来代替上面那种配置，例如：
+
+```json
+{
+  "name": "my-program",
+  "version": "1.2.5",
+  "bin": "./path/to/program"
+}
+```
+
+作用和如下写法相同:
+
+```json
+{
+  "name": "my-program",
+  "version": "1.2.5",
+  "bin": { "my-program": "./path/to/program" }
+}
+```
+
+### repository
+
+指定一个代码存放地址 便于用户进行查看和贡献
+
+```javascript
+"repository" :
+  {
+    "type" : "git",
+    "url" : "http://github.com/npm/npm.git"
+  }
+```
+
+或者 `github:user/repo`
+
+### scripts
+
+scripts 属性是一个对象，里边指定了项目的生命周期个各个环节需要执行的命令。  
+key 是生命周期中的事件，value 是要执行的命令。  
+具体的内容有 install start stop 等
+
+### config
+
+用来设置一些项目不怎么变化的项目配置，例如 port 等。
+用户用的时候可以使用如下用法：
+
+```javascript
+http.createServer(...).listen(process.env.npm_package_config_port)
+```
+
+可以通过 npm config set foo:port 80 来修改 config。
+
+```json
+{ "name": "foo", "config": { "port": "8080" } }
+```
+
+### dependencies
+
+dependencies 属性是一个对象，配置模块依赖的模块列表，key 是模块名称，value 是版本范围，  
+版本范围是一个字符，可以被一个或多个空格分割。  
+dependencies 也可以被指定为一个 git 地址或者一个压缩包地址。
+
+### man
+
+制定一个或通过数组制定一些文件来让 linux 下的 man 命令查找文档地址。  
+如果只有一个文件被指定的话，安装后直接使用 man+模块名称，而不管 man 指定的文件的实际名称。例如:
+
+```json
+{
+  "name": "foo",
+  "version": "1.2.3",
+  "description": "A packaged foo fooer for fooing foos",
+  "main": "foo.js",
+  "man": "./man/doc.1"
+}
+```
+
+通过 man foo 命令会得到 ./man/doc.1 文件的内容。  
+如果 man 文件名称不是以模块名称开头的，安装的时候会给加上模块名称前缀。因此，下面这段配置：
+
+```json
+{
+  "name": "foo",
+  "version": "1.2.3",
+  "description": "A packaged foo fooer for fooing foos",
+  "main": "foo.js",
+  "man": ["./man/foo.1", "./man/bar.1"]
+}
+```
+
+会创建一些文件来作为 man foo 和 man foo-bar 命令的结果。  
+man 文件必须以数字结尾，或者如果被压缩了，以.gz 结尾。数字表示文件将被安装到 man 的哪个部分。
+
+```json
+{
+  "name": "foo",
+  "version": "1.2.3",
+  "description": "A packaged foo fooer for fooing foos",
+  "main": "foo.js",
+  "man": ["./man/foo.1", "./man/foo.2"]
+}
+```
+
+会创建 man foo 和 man 2 foo 两条命令。
+
+### directories
+
+CommonJs 通过 directories 来制定一些方法来描述模块的结构，  
+npm 的[package.json 文件](https://registry.npmjs.org/npm/latest)中有这个字段的内容。
+
+### directories.lib
+
+告诉用户模块中 lib 目录在哪，这个配置目前没有任何作用，但是对使用模块的人来说是一个很有用的信息。
+
+### directories.bin
+
+如果你在这里指定了 bin 目录，这个配置下面的文件会被加入到 bin 路径下，如果你已经在 package.json 中配置了 bin 目录，那么这里的配置将不起任何作用。
+
+### directories.man
+
+指定一个目录，目录里边都是 man 文件，这是一种配置 man 文件的语法糖。
+
+### directories.doc
+
+在这个目录里边放一些 markdown 文件，可能最终有一天它们会被友好的展现出来（应该是在 npm 的网站上）
+
+### directories.example
+
+放一些示例脚本，或许某一天会有用 - -！
+目前这个配置没有任何作用.
+
 ## 创建 package.json
 
 1.  使用 CLI
