@@ -190,6 +190,116 @@ http.createServer(...).listen(process.env.npm_package_config_port)
 dependencies 属性是一个对象，配置模块依赖的模块列表，key 是模块名称，value 是版本范围，  
 版本范围是一个字符，可以被一个或多个空格分割。  
 dependencies 也可以被指定为一个 git 地址或者一个压缩包地址。
+版本的定义需要遵循[semver](http://caibaojian.com/npm/misc/semver.html)
+
+### devDependencies
+
+如果有人想要下载并使用你的模块，也许他们并不希望或需要下载一些你在开发过程中使用的额外的测试或者文档框架。  
+在这种情况下，最好的方法是把这些依赖添加到 devDependencies 属性的对象中。  
+这些模块会在 npm link 或者 npm install 的时候被安装，也可以像其他 npm 配置一样被管理，详见 npm 的 config 文档。  
+对于一些跨平台的构建任务，例如把 CoffeeScript 编译成 JavaScript，  
+就可以通过在 package.json 的 script 属性里边配置 prepublish 脚本来完成这个任务，  
+然后需要依赖的 coffee-script 模块就写在 devDependencies 属性中。  
+例如:
+
+```json
+{
+  "name": "ethopia-waza",
+  "description": "a delightfully fruity coffee varietal",
+  "version": "1.2.3",
+  "devDependencies": {
+    "coffee-script": "~1.6.3"
+  },
+  "scripts": {
+    "prepublish": "coffee -o lib/ -c src/waza.coffee"
+  },
+  "main": "lib/waza.js"
+}
+```
+
+prepublish 脚本会在发布之前运行，因此用户在使用之前就不用再自己去完成编译的过程了。在开发模式下，运行 npm install 也会执行这个脚本（见 npm script 文档），因此可以很方便的调试。
+
+### peerDependencies
+
+有时候做一些插件开发，比如 grunt 等工具的插件，它们往往是在 grunt 的某个版本的基础上开发的，  
+而在他们的代码中并不会出现 require("grunt")这样的依赖，dependencies 配置里边也不会写上 grunt 的依赖， dependencies 为了说明此模块只能作为插件跑在宿主的某个版本范围下，可以配置 peerDependencies：
+
+```json
+{
+  "name": "tea-latte",
+  "version": "1.3.5",
+  "peerDependencies": {
+    "tea": "2.x"
+  }
+}
+```
+
+上面这个配置确保再 npm install 的时候 tea-latte 会和 2.x 版本的 tea 一起安装，  
+而且它们两个的依赖关系是同级的：
+
+```
+├── tea-latte@1.3.5
+└── tea@2.2.0
+```
+
+这个配置的目的是让 npm 知道，如果要使用此插件模块，请确保安装了兼容版本的宿主模块。
+
+### bundleDependencies
+
+指定发布的时候会被一起打包的模块。
+
+### optionalDependencies
+
+如果一个依赖模块可以被使用， 同时你也希望在该模块找不到或无法获取时 npm 继续运行，  
+你可以把这个模块依赖放到 optionalDependencies 配置中。这个配置的写法和 dependencies 的写法一样，  
+不同的是这里边写的模块安装失败不会导致 npm install 失败。  
+当然，这种模块就需要你自己在代码中处理模块确实的情况了，例如：
+
+```javascript
+try {
+  var foo = require('foo');
+  var fooVersion = require('foo/package.json').version;
+} catch (er) {
+  foo = null;
+}
+if (notGoodFooVersion(fooVersion)) {
+  foo = null;
+}
+
+// .. then later in your program ..
+
+if (foo) {
+  foo.doFooThings();
+}
+```
+
+{% note info modern %}
+optionalDependencies 中的配置会覆盖 dependencies 中的配置，最好只在一个地方写。
+{% endnote %}
+
+### engines
+
+你可以指定项目运行的 node 版本范围，如下：
+
+```json
+{ "engines": { "node": ">=0.10.3 <0.12" } }
+```
+
+和 dependencies 一样，如果你不指定版本范围或者指定为\*，任何版本的 node 都可以。
+也可以指定一些 npm 版本可以正确的安装你的模块，例如：
+
+```json
+{ "engines": { "npm": "~1.0.20" } }
+```
+
+### private
+
+如果这个属性被设置为 true，npm 将拒绝发布它，这是为了防止一个私有模块被无意间发布出去。  
+如果你只想让模块被发布到一个特定的 npm 仓库，如一个内部的仓库，可在下面的 publishConfig 中配置仓库参数。
+
+### publishConfig
+
+这个配置是会在模块发布时用到的一些值的集合。如果你不想模块被默认被标记为最新的，或者默认发布到公共仓库，可以在这里配置 tag 或仓库地址。
 
 ### man
 
@@ -333,3 +443,7 @@ module.exports = {
 参考文献:
 
 1. https://www.npmjs.cn/getting-started/using-a-package.json/
+2. http://caibaojian.com/npm/files/package.json.html
+3. https://zoucz.com/blog/2016/02/17/npm-package/
+
+lock: https://juejin.cn/post/6844904116108410887
