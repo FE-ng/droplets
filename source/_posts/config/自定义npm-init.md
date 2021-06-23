@@ -1,6 +1,6 @@
 ---
 title: .npm-init.js 配置
-cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210616113743.png
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210623160424.png
 date: 2021-06-23 15:08:33
 categories:
   - 配置

@@ -1,6 +1,6 @@
 ---
 title: reduce
-cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210616113743.png
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210623160309.png
 date: 2021-06-17 08:32:12
 categories:
   - javascript
@@ -273,7 +273,7 @@ task: 提供单独的一篇数组扁平的方法总结
 ```javascript
 // 使用reduceRight 以及','号运算符
 function Reverse1(arr = []) {
-  /* 
+  /*
   (prev, cur) => (prev.push(cur), prev) 相当于
   (prev, cur) => {
     prev.push(cur);
