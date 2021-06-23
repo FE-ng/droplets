@@ -447,3 +447,10 @@ module.exports = {
 3. https://zoucz.com/blog/2016/02/17/npm-package/
 
 lock: https://juejin.cn/post/6844904116108410887
+https://segmentfault.com/a/1190000013962514
+https://www.zhihu.com/question/264560841
+
+Semver:
+https://juejin.cn/post/6844903516754935816
+
+原理: https://cloud.tencent.com/developer/article/1555982
