@@ -92,6 +92,8 @@ https://sixdegree.github.io/2016/01/02/Hexo.html
 https://vincentqin.tech/posts/build-a-website-using-hexo/
 [github 首页装饰](https://cxvh.com/2021/02/14/git/READEME/)
 
+https://www.antmoe.com/posts/6081157f/
+
 https://chuchendjs.github.io/posts/BY-MOchange/
 
 hexo clean & hexo g & hexo s
