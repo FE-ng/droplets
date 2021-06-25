@@ -114,6 +114,7 @@ main 属性指定了程序的主入口文件。
 意思是，如果你的模块被命名为 foo，用户安装了这个模块并通过 require("foo")来使用这个模块，  
 那么 require 返回的内容就是 main 属性指定的文件中 module.exports 指向的对象。  
 它应该指向模块根目录下的一个文件。对大对数模块而言，这个属性更多的是让模块有一个主入口文件，然而很多模块并不写这个属性。
+默认值是模块根目录下面的 `index.js` 文件。
 
 ### bin
 
@@ -126,8 +127,10 @@ bin 属性是一个已命令名称为 key，本地文件名称为 value 的 map 
 { "bin": { "myapp": "./cli.js" } }
 ```
 
-模块安装的时候，若是全局安装，则 npm 会为 bin 中配置的文件在 bin 目录下创建一个软连接  
+模块安装的时候，若是全局安装，则 npm 会为 bin 中配置的文件在 bin 目录(/usr/local/node_modules/.bin/)下创建一个软连接  
 （对于 windows 系统，默认会在 C:\Users\username\AppData\Roaming\npm 目录下），  
+如果是全局安装，npm 将会使用符号链接把这些文件链接到
+如果是本地安装，会链接到./node_modules/.bin/。
 若是局部安装，则会在项目内的./node_modules/.bin/目录下创建一个软链接。  
 因此，按上面的例子，当你安装 myapp 的时候，npm 就会为 cli.js 在/usr/local/bin/myapp 路径创建一个软链接。  
 如果你的模块只有一个可执行文件，并且它的命令名称和模块名称一样，你可以只写一个字符串来代替上面那种配置，例如：
@@ -190,13 +193,19 @@ http.createServer(...).listen(process.env.npm_package_config_port)
 dependencies 属性是一个对象，配置模块依赖的模块列表，key 是模块名称，value 是版本范围，  
 版本范围是一个字符，可以被一个或多个空格分割。  
 dependencies 也可以被指定为一个 git 地址或者一个压缩包地址。
+`dependencies` 字段指定了项目运行所依赖的模块（生产环境使用），如 antd、 react、 moment 等插件库：
+
+它们是我们生产环境所需要的依赖项，在把项目作为一个 npm 包的时候，用户安装 npm 包时只会安装 dependencies 里面的依赖。
+
 版本的定义需要遵循[semver](http://caibaojian.com/npm/misc/semver.html)
 
 ### devDependencies
 
 如果有人想要下载并使用你的模块，也许他们并不希望或需要下载一些你在开发过程中使用的额外的测试或者文档框架。  
 在这种情况下，最好的方法是把这些依赖添加到 devDependencies 属性的对象中。  
-这些模块会在 npm link 或者 npm install 的时候被安装，也可以像其他 npm 配置一样被管理，详见 npm 的 config 文档。  
+这些模块会在 npm link 或者 npm install 的时候被安装，也可以像其他 npm 配置一样被管理。  
+`devDependencies` 字段指定了项目开发所需要的模块（开发环境使用），如 webpack、typescript、babel 等：  
+在代码打包提交线上时，我们并不需要这些工具，所以我们将它放入 devDependencies 中  
 对于一些跨平台的构建任务，例如把 CoffeeScript 编译成 JavaScript，  
 就可以通过在 package.json 的 script 属性里边配置 prepublish 脚本来完成这个任务，  
 然后需要依赖的 coffee-script 模块就写在 devDependencies 属性中。  
@@ -445,12 +454,7 @@ module.exports = {
 1. https://www.npmjs.cn/getting-started/using-a-package.json/
 2. http://caibaojian.com/npm/files/package.json.html
 3. https://zoucz.com/blog/2016/02/17/npm-package/
-
-lock: https://juejin.cn/post/6844904116108410887
-https://segmentfault.com/a/1190000013962514
-https://www.zhihu.com/question/264560841
+4. https://juejin.cn/post/6844904159226003463
 
 Semver:
 https://juejin.cn/post/6844903516754935816
-
-原理: https://cloud.tencent.com/developer/article/1555982
