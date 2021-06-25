@@ -10,6 +10,15 @@ tags:
   - 包管理
 ---
 
+## npm
+
+npm 是一个包管理器也可以说是最大的软件仓库，它让 JavaScript 开发者分享、复用代码更方便（有点 maven 的感觉哈）。
+在程序开发中我们常常需要依赖别人提供的框架，写 JS 也不例外。这些可以重复的框架代码被称作包（package）或者模块（module），  
+一个包可以是一个文件夹里放着几个文件，同时有一个叫做 package.json 的文件。
+一个网站里通常有几十甚至上百个 package，分散在各处，通常会将这些包按照各自的功能进行划分（类似我们安卓开发中的划分子模块），  
+但是如果重复造一些轮子，不如上传到一个公共平台，让更多的人一起使用、参与这个特定功能的模块。
+而 npm 的作用就是让我们发布、下载一些 JS 轮子更加方便。
+
 <!-- # npm install 原理 -->
 
 <img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210624114733.png"  alt="效果图" />
@@ -271,3 +280,14 @@ package-lock.json 文件不由开发者自行写入，在协同开发时，某�
 参考文献
 链接：[一些 package-lock.json 的小知识](https://juejin.cn/post/6844904116108410887)
 链接：https://www.zhihu.com/question/62331583/answer/275248129
+
+https://myan.im/2018/03/24/you-dont-know-npm/index.html
+http://www.ruanyifeng.com/blog/2016/01/npm-install.html
+https://cloud.tencent.com/developer/article/1555982
+https://segmentfault.com/a/1190000013962514
+https://www.zhihu.com/question/264560841
+
+https://hejialianghe.gitee.io/computerNetwork/tools.html#_5-5-1-%E7%BD%91%E7%BB%9C%E4%BC%98%E5%8C%96%E6%8C%87%E6%A0%87
+
+npm-hooks
+https://segmentfault.com/a/1190000004881684
