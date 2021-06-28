@@ -220,7 +220,8 @@ npm cache ls react
 
 对于是否将 package-lock.json 文件上传到远程仓库，也有许多有趣的讨论，  
 **[例如 package-lock.json 需要写进 .gitignore 吗？](https://www.zhihu.com/question/264560841)**
-这里讨论的是将该文件上传到远程仓库时，可能遇到的一些问题和解决方法。
+lock 文件上传到远程仓库时，可能遇到的一些问题和解决方法。
+
 package-lock.json 的表现
 
 ## 在npm@5.4.2版本后的表现：
@@ -247,6 +248,61 @@ package-lock.json 的表现
 3. 5.4.2 版本后 [why is package-lock being ignored? · Issue #17979 · npm/npm](https://github.com/npm/npm/issues/17979)
 
 最终才有了 **在npm@5.4.2版本后的表现**
+
+## npm7
+
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628200407.png"  alt="效果图" />
+
+近期 组内的小伙伴有遇到如上的问题乍一看没有遇见过 但是提示却写的非常的明确 提取到 root 里面的 eslint 依赖是eslint@7.29.0  
+而内置的eslint-config-airbnb@18.2.1却希望宿主的 eslint 版本是^5.16.0 || ^6.8.0 || ^7.2.0;
+eslint-plugin-react-hooks@1.7.0希望宿主的 eslint 版本是^3.0.0-^6.0.0;
+二者产生了冲突从而无法建立依赖数报错;
+解决方式也写的比较明确 `npm install --force` 或者 npm `install --legacy-peer-deps `;
+
+经过查证 我们发现
+
+除了一些新特性和不兼容更改之外。与 npm 6 相比，我们对 npm 7 的性能方面产生了一些重要的影响，其中包括：
+
+- 依赖包数量上减少了 54%（npm 7 67 个，npm 6 123 个）
+- 代码测试覆盖率增加了 54%(npm 7 94% vs npm 6 77%)
+- 因此性能得到了比较大的提升
+
+### 修改 lock
+
+一个需要注意的改动是新的 lockfile 格式，该格式会向后兼容 npm 6 用户
+
+在以前的版本中，yarn.lock 文件被忽略，npm CLI 现在可以使用 yarn.lock 作为 package 元数据和依赖的来源。
+如果存在 yarn.lock，则 npm 还将使它与 package 的内容保持最新。
+
+使用 npm 7 并且在有 v1 的 lockfile 的项目中执行 npm install，则会把 lock file 文件的内容取代成 v2 的格式。
+如果想避免这种行为，可以通过执行 npm install --no-save
+自处 v1 和 v2 格式的区别可以埋个坑
+
+### peer dependencies
+
+但和上面提到过的问题息息相关的也就只有这个特性了;
+npm 7 中引入的一项新功能是自动安装 peer dependencies。在 npm 的之前版本（4-6）中，peer dependencies 冲突会有版本不兼容的警告，开发人员需要自己管理和安装 peerDependencies, 有冲突仍会安装依赖并不会抛出错误。但在 npm 7 中，新的 peer dependencies 可确保在 node_modules 树中 peerDependencies 的位置处或之上找到有效匹配的 peerDependencies。如果存在无法自动解决的依赖冲突，将会阻止安装。
+
+可以通过使--force 选项重新安装来绕过冲突，或者选择--legacy-peer-deps 选项 peer dependencies 的依赖关系（类似于 npm 版本 4-6）。
+
+由于许多包都依赖宽松的 peer dependencies 解析，npm 7 将打印警告并解决包依赖树中存在的大多数同级冲突，因此这些冲突不能手动处理。要在所有层级强制执行严格正确的 peer dependencies 依赖关系，请使用--strict-peer-deps 选项。
+
+### 完全支持 node_modules 内的符号链接
+
+此前，npm 将有向有环的包依赖展开成树结构，导致冗余，也容易出现版本冲突
+此版本里，npm 将会把有向有环的包尽可能展平，并使用符号链接形成原有依赖
+使用了 @npmcli/arborist 包实现了符号链接和相关算法，性能更好、更可控、更少 bug
+使用了 npm link 替代之前 npm install --link
+
+### 环境变量修改
+
+追加 npm*package_resolved、npm_package_integrity、npm_command
+移除 npm_package*_、npm*config*_
+PATH 环境变量将包含全部的 node_modules/.bin 目录
+
+### npx 使用 npm exec 进行重构，并内置在新版本中
+
+### 支持了 acceptDependencies 声明，允许手工声明覆盖一些包的依赖版本
 
 ## npm ci
 
@@ -291,3 +347,8 @@ https://hejialianghe.gitee.io/computerNetwork/tools.html#_5-5-1-%E7%BD%91%E7%BB%
 
 npm-hooks
 https://segmentfault.com/a/1190000004881684
+
+[npm install xxxx --legacy-peer-deps 到底做了些什么？](https://juejin.cn/post/6971268824288985118)
+https://stackoverflow.com/questions/66020820/npm-when-to-use-force-and-legacy-peer-deps
+https://stackoverflow.com/questions/66239691/what-does-npm-install-legacy-peer-deps-do-exactly-when-is-it-recommended-wh
+https://www.cnblogs.com/zhaohui-116/p/14285015.html
