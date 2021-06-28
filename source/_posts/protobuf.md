@@ -39,6 +39,8 @@ console.log(buf);
 
 ## How fast ?
 
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628105650.png"  alt="效果图" />
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628105933.png"  alt="效果图" />
 从官方的测试数科院看到一条消息数据，用 protobuf 序列化后的大小是 json 的 10 分之一，只有 xml 格式的 20 分之一，但是性能却是它们的 5~100 倍!  
 这是飞一样的感觉~~这也就是为什么我们要了解它的原因,万一哪天用到了呢;快的原因这里不去深究,感兴趣的同学可以从文献中参考一二;  
 proto3 中导入 proto2 定义的消息类型，反之亦然。然而，proto2 中的枚举不能直接用在 proto3 语法中（但导入到 proto2 中 proto3 定义的枚举是可用的）。
@@ -47,7 +49,7 @@ proto3 中导入 proto2 定义的消息类型，反之亦然。然而，proto2 �
 
 proto3 比 proto2 支持更多语言却更加简洁。去除了一些复杂的语法和特性，更强调约定而弱化语法,所以我们基于 proto3 进行示例;
 test.proto 文件如下
-
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110009.png"  alt="效果图" />
 其中
 syntax = "proto3”;指定 proto 版本，默认为 proto2，并且在 proto 文件中必须是第一行
 proto 文件可以相互引用（import），因此 package 可以给文件一个的命名空间 防止消息类型之间的名称冲突
@@ -56,20 +58,20 @@ message 消息类型,前端理解成一个 interface 会事半功倍;
 
 1. keywords:
 
-- singular 格式正确的消息可以有 0 个或 1 个该字段(但不能多于 1 个)。proto3 语法的默认字段规则；
-- repeated 格式正确的消息中该字段可以重复任意次数（包括 0 次）。重复值的顺序将被保留；
-- reserved 在使用彻底删除或注释掉某个字段的方式来更新消息类型时，
+   - singular 格式正确的消息可以有 0 个或 1 个该字段(但不能多于 1 个)。proto3 语法的默认字段规则；
+   - repeated 格式正确的消息中该字段可以重复任意次数（包括 0 次）。重复值的顺序将被保留；
+   - reserved 在使用彻底删除或注释掉某个字段的方式来更新消息类型时，
 
-将来其他用户再更新该消息类型时可能会重用这个字段编号。
+   将来其他用户再更新该消息类型时可能会重用这个字段编号。
 
-后面再加载该 .ptoto 的旧版本时会如数据损坏，隐私漏洞等问题。
+   后面再加载该 .ptoto 的旧版本时会如数据损坏，隐私漏洞等问题。
 
-防止该问题发生的办法是将需要删除字段的编号（或字段名称，字段名称会导致在 JSON 序列化时产生问题）设置为保留项 reserved；
+   防止该问题发生的办法是将需要删除字段的编号（或字段名称，字段名称会导致在 JSON 序列化时产生问题）设置为保留项 reserved；
 
 2. type:
 
-- 可以是数据中自己定义的 message(理解成 interface 可以被嵌套使用)；
-- 也可以是 type 类型对应表中的值(和定义 interface 时的类型声明类似)；
+   - 可以是数据中自己定义的 message(理解成 interface 可以被嵌套使用)；
+   - 也可以是 type 类型对应表中的值(和定义 interface 时的类型声明类似)；
 
 3. custom_key: 自己定义的 key 键；
 4. tag: proto 文件中对我们 custom_key 键的描述,或者理解成 react 组件中的唯一 key 值；
@@ -82,9 +84,10 @@ tag 用于在消息二进制格式中标识字段，同时要求消息一旦使�
 注意不能使用 19000 到 19999 （FieldDescriptor::kFirstReservedNumber 到 FieldDescriptor::kLastReservedNumber）的字段编号，因为这些是 protocol buffer 内部保留的
 如果使用了这些预留的编号 或者之前用户自己保留的字段(reserved)protocol buffer 编译器会发出警告。
 
-此外 pb 还支持嵌套,枚举,定义 map(map<key_type, value_type> map_field = N);
+此外 pb 还支持嵌套,枚举,定义 map(`map<key_type, value_type> map_field = N`);
 
-type 类型对应表格
+type 类型对应表格:
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110040.png"  alt="效果图" />
 
 # 选择一个好的工具
 
@@ -105,29 +108,32 @@ type 类型对应表格
 安装之后在./node_modules/protobufjs/bin/pbjs 文件目录里提供了 pbjs 命令
 不过命令藏得很深 并且没有设置 alias 所以推荐使用 npx 将我们之前的 test.proto 文件进行转化;
 
-npx pbjs -t json _.proto > _.json
-将 proto 转化成 json
+> npx pbjs -t json _.proto > _.json
+> 将 proto 转化成 json
 
-npx pbjs -t json-module -w commonjs -o _.js _.proto
-将 proto 转化成 js
+> npx pbjs -t json-module -w commonjs -o _.js _.proto
+> 将 proto 转化成 js
 
-这里推荐转化成 js 因为转成 json 也得用内置的 api(本质还是转成了 js)转化之后才能获得需要的数据；
+**这里推荐转化成 js 因为转成 json 也得用内置的 api(本质还是转成了 js)转化之后才能获得需要的数据；**
 
-proto 文件转成的 json 文件
+### proto 文件转成的 json 文件
 
-json 文件中会把 proto 文件中的信息根据 proto 的规则进行转化
+json 文件中会把 proto 文件中的信息根据 proto 的规则进行转化  
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110054.png"  alt="效果图" />
 
-proto 文件转成的 js 文件
+### proto 文件转成的 js 文件
 
 可以看到 js 文件比起 json 文件区别就是$protobuf 进行了一次封装，从而提供给了我们可操作的 api；
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110229.png"  alt="效果图" />
 
 获取数据并且使用对应的 proto 进行数据解析
-
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110246.png"  alt="效果图" />
 result:
-
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110301.png"  alt="效果图" />
 pbMessage:
-
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110313.png"  alt="效果图" />
 data:
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110326.png"  alt="效果图" />
 
 ## node 中的使用
 
@@ -136,10 +142,16 @@ data:
 但是 protobufjs 的库能够让我们直接在 node 环境中使用 pb 文件不需要额外的处理;这也是我们选择 protobujs 的理由之一
 
 node 中的使用和浏览器中差异并不大，只是 node 因为 protobufjs 的便携性 可以不用使用转化后的文件，而是直接使用 proto 文件进行处理；
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110354.png"  alt="效果图" />
 
-node 输出
+### node 输出
+
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110419.png"  alt="效果图" />
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110433.png"  alt="效果图" />
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110510.png"  alt="效果图" />
 
 到此 node 端简单的用法也就完成了，包含了编码和解码；
+<img class="image400" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628110519.png"  alt="效果图" />
 
 # 结语
 
@@ -149,7 +161,7 @@ node 输出
 
 不过维护的处理方式也可以有别的方式（子仓库，动态 pb 等）不过后端传 proto 文件，前端处理处理也就根据麻烦了，因此因地制宜才是上策。
 
-参考文献
+参考文献:
 
 - https://developers.google.com/protocol-buffers/docs/proto3
 - https://www.deadalnix.me/2017/01/08/variable-size-integer-encoding/
