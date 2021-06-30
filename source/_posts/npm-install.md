@@ -352,3 +352,6 @@ https://segmentfault.com/a/1190000004881684
 https://stackoverflow.com/questions/66020820/npm-when-to-use-force-and-legacy-peer-deps
 https://stackoverflow.com/questions/66239691/what-does-npm-install-legacy-peer-deps-do-exactly-when-is-it-recommended-wh
 https://www.cnblogs.com/zhaohui-116/p/14285015.html
+https://segmentfault.com/q/1010000011571000
+https://zhuanlan.zhihu.com/p/237532427
+https://github.com/rogeriochaves/npm-force-resolutions/issues
