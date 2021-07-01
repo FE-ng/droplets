@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-26 14:41:18
- * @LastEditTime: 2021-06-26 14:58:49
+ * @LastEditTime: 2021-07-01 22:21:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_drafts/vue.md
@@ -32,6 +32,9 @@ dom diff
 vue1 不支持 vue2 支持 原因 渲染效率 ssr nodejs 不支持 真实的 dom
 
 ### 数据响应式
+
+vue 为数据响应式
+react 则是单向数据流
 
 ### 数据是否可变
 
