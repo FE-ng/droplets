@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-26 11:08:53
- * @LastEditTime: 2021-06-26 11:12:08
+ * @LastEditTime: 2021-07-02 10:38:40
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_drafts/test.md
@@ -742,3 +742,6 @@ module.exports = {
 ```
 
 https://johninch.github.io/2019/12/12/eslintPrettier/
+
+1.  规范了组内 eslint 的提交规范 husky 拦截
+2.  自动化构建 git action flow Jenkins
