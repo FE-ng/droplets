@@ -127,3 +127,31 @@
 [data-theme='dark'] #article-container a.link-card img {
   filter: brightness(1);
 }
+
+/* Table Head */
+table thead th {
+  color: #fff;
+  background-color: #61adf4;
+  border-bottom-width: 0;
+}
+
+/* Column Style */
+table td {
+  color: #000;
+}
+/* Heading and Column Style */
+table tr,
+table th {
+  border: none;
+  border-color: rgb(89, 136, 189);
+}
+
+/* Padding and font style */
+table td,
+table th {
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 12px;
+  font-family: 'Verdana';
+  text-align: center;
+}
