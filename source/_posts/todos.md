@@ -26,7 +26,7 @@ tags:
 11. > github vue 项目中的记录的转移
 12. > github node 使用的记录的转移
 13. > node 邮件 定时邮件模块
-14. > snowpack vite esbuild rollup sevlte webpack parcel
+14. > snowpack vite esbuild rollup sevlte webpack parcel petite-vue alpine
 15. > oneTab 中的页面处理
 16. > juejin 收藏的理解消化
 17. > 微信收藏理解总结
