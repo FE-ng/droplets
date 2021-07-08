@@ -45,7 +45,7 @@ copy:
 social:
   fab fa-github: https://github.com/FE-ng || Github
   fas fa-envelope: mailto:fengliu018@gmail.com || Email
-
+  fa fa-rss: /atom.xml || RSS链接
 # search (搜索)
 # --------------------------------------
 
