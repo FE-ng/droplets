@@ -49,7 +49,7 @@ MacBook 提供了强大的触控板硬件，支持用力点按和多指触控。
 
   <img style="width:600px;" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210426141736.png"  alt="效果图" />
 
-如果找不到 “任意来源” 这个选项，可以通过一行终端的命令解决，按住 command + 空格 ，输入 “终端.app” 打开终端。在终端中输入命令：
+如果找不到 “任意来源” 这个选项，可以通过一行终端的命令解决，按住 <kbd>command</kbd> + 空格 ，输入 “终端.app” 打开终端。在终端中输入命令：
 
 ```bash
 sudo spctl --master-disable
@@ -59,25 +59,27 @@ sudo spctl --master-disable
 
 ### 常用快捷键 (可自行摸索)
 
-command + option + D : 能够控制程序坞与菜单栏是否常驻
+<kbd>command</kbd> + <kbd>option</kbd> + <kbd>D</kbd> : 能够控制程序坞与菜单栏是否常驻
 
-command + option + ESC : 可以查看未响应的程序并快速清除  
+<kbd>command</kbd> + <kbd>option</kbd> + <kbd>ESC</kbd> : 可以查看未响应的程序并快速清除  
 ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210514162013.png ':class=image600')
 
-command + M : 将当前窗口快速缩小 在程序坞与菜单栏中能够查看  
+<kbd>command</kbd> + <kbd>M</kbd> : 将当前窗口快速缩小 在程序坞与菜单栏中能够查看  
 ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210514162149.png ':class=image600')
 
-command + W : 关闭或者缩小, 缩小时
+<kbd>command</kbd> + <kbd>W</kbd> : 关闭或者缩小, 缩小时
 
-command + H : 将当前窗口所属的软件快速缩小 并且程序坞与菜单栏中也查看不到
+<kbd>command</kbd> + <kbd>H</kbd> : 将当前窗口所属的软件快速缩小 并且程序坞与菜单栏中也查看不到
 
-command + Q : 退出程序
+<kbd>command</kbd> + <kbd>Q</kbd> : 退出程序
 
-command + D : 在 finder 文件聚焦在文件上时是快速生产副本的方式 === ( command + C ) + (command + V )
+<kbd>command</kbd> + <kbd>D</kbd>: 在 finder 文件聚焦在文件上时是快速生产副本的方式 === ( <kbd>command</kbd> + <kbd>C</kbd>) + (<kbd>command</kbd> + <kbd>V</kbd>)
 
-command + C | command + V : 复制 | 粘贴
+<kbd>command</kbd> + <kbd>C</kbd>| <kbd>command</kbd> + <kbd>V</kbd> : 复制 | 粘贴
 
-command + N : 新窗口
+<kbd>command</kbd> + <kbd>N</kbd> : 新窗口
+
+<kbd>command</kbd> + <kbd>shift</kbd> + <kbd>(3|4|5)</kbd> : 可以调用 mac 的截屏或者录屏功能
 
 ......
 
