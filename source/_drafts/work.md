@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-02 17:50:44
- * @LastEditTime: 2021-07-02 17:53:21
+ * @LastEditTime: 2021-07-12 19:38:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_drafts/work.md
@@ -10,12 +10,13 @@
 <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210702175238.png"  alt="效果图" />
 
 ```typescript
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable consistent-return */
 /* eslint-disable no-return-assign */
 /*
  * @Author: your name
  * @Date: 2021-06-30 14:31:53
- * @LastEditTime: 2021-07-02 15:42:36
+ * @LastEditTime: 2021-07-12 19:27:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /fe-datahub/src/pages/TagLibrary/modules/Step2.tsx
@@ -27,17 +28,18 @@ import { useSelector } from 'react-redux';
 import { Form, Input, Layout, Tabs } from 'antd';
 import { FormInstance } from 'antd/lib/form/Form';
 import globalMessages from 'utils/messages';
-import { isModify } from 'utils/utils';
+import { isView } from 'utils/utils';
 import { DeleteOutlined } from '@ant-design/icons';
 import debounce from 'lodash/debounce';
+import cloneDeep from 'lodash/cloneDeep';
 
 import messages from '../messages';
 import selectors from '../selectors';
-// import ButtonPicker from '../components/ButtonPicker';
 import { formItemLayout, tagNameMaxLen } from '../constants';
 import { Container, Category, CategoryTitle, CategoryItem, ITabs } from '../components/styled';
+import { ISubTagList } from '../types';
 
-const { useState, useEffect, useRef, useMemo, useCallback } = React;
+const { useState, useEffect, useRef, useMemo } = React;
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
@@ -49,13 +51,13 @@ interface IStep2 {
 function Step2(props: IStep2) {
   const { intl, form } = props;
   const mainModal = useSelector(selectors.mainModal);
-  const [panelData, setPanelData] = useState([]);
+  const [panelData, setPanelData] = useState<ISubTagList[]>([]);
   const [activeCategory, setActiveCategory] = useState('');
   const [activeCategoryIdx, setActiveCategoryIdx] = useState(-1);
 
   const addFunc = useRef(null);
   const { setFieldsValue, getFieldsValue, validateFields, resetFields } = form;
-  const { data = {}, type = 'edit', visible = true } = mainModal;
+  const { type = 'edit', visible = false, data = {} } = mainModal;
 
   useEffect(() => {
     if (visible) return;
@@ -71,23 +73,28 @@ function Step2(props: IStep2) {
     };
   }, [visible]);
 
+  useEffect(() => {
+    setPanelData(data.sub_tag_list || []);
+  }, [JSON.stringify(data.sub_tag_list)]);
+
   const deleteCategory = async (index: number) => {
-    const { step1 = [] } = getFieldsValue();
+    const { sub_tag_list = [] } = getFieldsValue();
     const deleteInner = () => {
-      if (step1.length <= 0) return;
-      const newStep1 = [...step1];
+      if (sub_tag_list.length <= 0) return;
+      const newStep1 = [...sub_tag_list];
       newStep1.splice(index, 1);
       panelData.splice(index, 1);
       setPanelData([...panelData]);
-      setFieldsValue({ step1: newStep1 });
+      setFieldsValue({ sub_tag_list: newStep1 });
+      // 在下一个任务队列中更新idx 保证idx存在
       setTimeout(() => {
         const newIdx = index - 1 > 0 ? index - 1 : 0;
-        setActiveCategory(panelData?.[newIdx]?.name || '');
+        setActiveCategory(panelData?.[newIdx]?.sub_tag_name || '');
         setActiveCategoryIdx(newIdx);
       }, 0);
     };
     try {
-      if (index !== step1.length - 1) {
+      if (index !== sub_tag_list.length - 1) {
         const values = await validateFields();
         if (!values) return;
       }
@@ -104,31 +111,32 @@ function Step2(props: IStep2) {
     const values = await validateFields();
     if (!values) return;
     setActiveCategory(activeKey);
-    const idx = panelData.findIndex((item: any) => item.name === activeKey);
+    const idx = panelData.findIndex((item: ISubTagList) => item.sub_tag_name === activeKey);
     setActiveCategoryIdx(idx);
   };
 
   const addCategory = async () => {
     const values = await validateFields();
     if (!values) return;
-    const defaultData = { name: '请填写名称' };
+    const defaultData = { sub_tag_name: intl.formatMessage(messages.tabPlaceholder) };
     const newPanelData = [...panelData, defaultData];
     setPanelData(newPanelData);
     addFunc.current();
+    // 在下一个任务队列中更新idx 保证idx存在
     setTimeout(() => {
-      setActiveCategory('请填写名称');
+      setActiveCategory(intl.formatMessage(messages.tabPlaceholder));
       setActiveCategoryIdx(newPanelData.length - 1);
     }, 0);
   };
 
   const renderTabPane = useMemo(
     () =>
-      panelData?.map?.((item: any, index: number) => (
+      panelData?.map?.((item: ISubTagList, index: number) => (
         <TabPane
-          key={item.name}
+          key={item.sub_tag_name}
           tab={
             <CategoryItem>
-              <span>{item.name}</span>
+              <div>{item.sub_tag_name}</div>
               <span onClick={() => deleteCategory(index)}>
                 <DeleteOutlined />
                 {intl.formatMessage(globalMessages.delete)}
@@ -140,9 +148,10 @@ function Step2(props: IStep2) {
     [panelData],
   );
 
-  const changeTagName = (e: any, index: number) => {
-    panelData[index].name = e.currentTarget.value;
-    setPanelData([...panelData]);
+  const changeTagName = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const newPanelData = cloneDeep(panelData);
+    newPanelData[index].sub_tag_name = e.currentTarget.value;
+    setPanelData(newPanelData);
     setActiveCategory(e.currentTarget.value);
   };
 
@@ -162,20 +171,21 @@ function Step2(props: IStep2) {
       </Category>
       <Content style={{ margin: '0', background: '#fff', paddingTop: '15px' }}>
         <Form {...formItemLayout} form={form}>
-          <Form.List name='step1'>
+          <Form.List name='sub_tag_list' initialValue={data.sub_tag_list}>
             {(fields, { add }) => (
               <>
+                {/* 暴露add方法 */}
                 {(addFunc.current = add)}
                 {fields.map(({ key, name, fieldKey, ...restField }, index) => (
                   <>
+                    {/* 只显示当前的list */}
                     {activeCategoryIdx === index && (
                       <>
                         <Form.Item
                           {...restField}
-                          name={[name, 'tag_name']}
-                          fieldKey={[fieldKey, 'tag_name']}
-                          label={intl.formatMessage(messages.tag_name)}
-                          // initialValue={data.tag_name}
+                          name={[name, 'sub_tag_name']}
+                          fieldKey={[fieldKey, 'sub_tag_name']}
+                          label={intl.formatMessage(messages.sub_tag_name)}
                           rules={[
                             { required: true, message: intl.formatMessage(globalMessages.required) },
                             {
@@ -184,8 +194,13 @@ function Step2(props: IStep2) {
                             },
                             () => ({
                               validator(_: unknown, value: string) {
-                                if (panelData.some((item: any, i: number) => i !== index && item.name === value)) {
-                                  return Promise.reject(intl.formatMessage(messages.tag_pattern));
+                                // 检测除自身外的key 有相同时校验失败
+                                if (
+                                  panelData.some(
+                                    (item: ISubTagList, i: number) => i !== index && item.sub_tag_name === value,
+                                  )
+                                ) {
+                                  return Promise.reject(intl.formatMessage(messages.sameKeyWarning));
                                 }
                                 // eslint-disable-next-line prefer-promise-reject-errors
                                 return Promise.resolve();
@@ -194,21 +209,20 @@ function Step2(props: IStep2) {
                           ]}>
                           <Input
                             placeholder={intl.formatMessage(globalMessages.inputPlaceholder)}
-                            disabled={!isModify(type)}
+                            disabled={isView(type)}
                             maxLength={tagNameMaxLen + 1}
-                            onChange={(e: any) => changeTagName(e, index)}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeTagName(e, index)}
                           />
                         </Form.Item>
                         <Form.Item
                           {...restField}
-                          name={[name, 'tag_category']}
-                          fieldKey={[fieldKey, 'tag_category']}
-                          label={intl.formatMessage(messages.tag_category)}
-                          // initialValue={data.tag_category}
+                          name={[name, 'sub_tag_desc']}
+                          fieldKey={[fieldKey, 'sub_tag_desc']}
+                          label={intl.formatMessage(messages.sub_tag_desc)}
                           rules={[{ required: true, message: intl.formatMessage(globalMessages.required) }]}>
                           <Input
                             placeholder={intl.formatMessage(globalMessages.inputPlaceholder)}
-                            disabled={!isModify(type)}
+                            disabled={isView(type)}
                           />
                         </Form.Item>
                       </>
