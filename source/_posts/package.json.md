@@ -22,6 +22,8 @@ package.json 文件有一下这些功能和作用:
 - 是工具的配置中心。
 - npm 和 yarn 管理项目的依赖项以及项目的元数据文件。
 
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210716145136.png"  alt="效果图" />
+
 ## 字段解析
 
 package.json 配置的字段有很多需要对其有一个系统的认识。

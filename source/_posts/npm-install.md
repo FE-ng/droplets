@@ -10,7 +10,7 @@ tags:
   - 包管理
 ---
 
-## npm
+## npm 介绍
 
 npm 是一个包管理器也可以说是最大的软件仓库，它让 JavaScript 开发者分享、复用代码更方便（有点 maven 的感觉哈）。
 在程序开发中我们常常需要依赖别人提供的框架，写 JS 也不例外。这些可以重复的框架代码被称作包（package）或者模块（module），  
@@ -22,6 +22,85 @@ npm 是一个包管理器也可以说是最大的软件仓库，它让 JavaScrip
 <!-- # npm install 原理 -->
 
 <img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210624114733.png"  alt="效果图" />
+
+## npm 命令
+
+### npm update
+
+如果想更新已安装模块，就要用到 npm update 命令。
+
+```bash
+npm update <packageName>
+```
+
+它会先到远程仓库查询最新版本，然后查询本地版本。如果本地版本不存在，或者远程版本较新，就会安装。
+
+1. 先到远程仓库查询最新版本
+2. 然后对比本地版本，如果本地版本不存在，或者远程版本较新就会比较版本规则, 否则不更新
+3. 查看 package.json 中对应的语义版本规则
+4. 如果当前新版本符合语义规则，就更新，否则不更新
+
+远程版本是否较新是由 npm 模块仓库提供的信息  
+[查询服务网址](https://registry.npmjs.org/)
+
+这个网址后面跟上模块名，就会得到一个 JSON 对象，里面是该模块所有版本的信息。  
+比如，访问 https://registry.npmjs.org/react ,就会看到 react 模块所有版本的信息。
+
+```bash
+npm view react
+# npm view 的别名
+npm info react
+npm show react
+npm v react
+```
+
+registry 网址的模块名后面，还可以跟上版本号或者标签，用来查询某个具体版本的信息
+返回的 JSON 对象里面，有一个 dist.tarball 属性，是该版本压缩包的网址。
+<img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210624192834.png"  alt="效果图" />
+到这个网址下载压缩包，在本地解压，就得到了模块的源码。  
+npm install 和 npm update 命令，都是通过这种方式安装模块的。
+
+### 缓存目录
+
+npm install 或 npm update 命令，从 registry 下载压缩包之后，都存放在本地的缓存目录。
+这个缓存目录，在 Linux 或 Mac 默认是用户主目录下的.npm 目录，在 Windows 默认是%AppData%/npm-cache。  
+通过配置命令，可以查看这个目录的具体位置`npm config get cache`;
+在这个目录下又存在我们主要关注是两个目录：
+
+- **content-v2**
+  用于存储 tar 包的缓存
+- index-v5，content-v2 目录
+  用于存储 tar 包的 hash。
+  <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210624201056.png"  alt="效果图" />
+
+  {% note info modern %}
+
+  npm 在执行安装时，可以根据 package-lock.json 中存储的 integrity、version、name 生成一个唯一的 key 对应到 index-v5 目录下的缓存记录，  
+  从而找到 tar 包的 hash，然后根据 hash 再去找缓存的 tar 包直接使用。
+  而这样的缓存策略是从 npm v5 版本开始的，在 npm v5 版本之前，每个缓存的模块在 ~/.npm 文件夹中以模块名的形式直接存储，
+  储存结构是{cache}/{name}/{version}。
+
+  {% endnote %}
+
+```
+npm cache ls react
+~/.npm/react/react/0.14.6/
+~/.npm/react/react/0.14.6/package.tgz
+~/.npm/react/react/0.14.6/package/
+~/.npm/react/react/0.14.6/package/package.json
+```
+
+每个模块的每个版本，都有一个自己的子目录，里面是代码的压缩包 package.tgz 文件，以及一个描述文件 package/package.json。
+除此之外，还会生成一个{cache}/{hostname}/{path}/.cache.json 文件。比如，从 npm 官方仓库下载 react 模块的时候，  
+就会生成 registry.npmjs.org/react/.cache.json 文件。
+
+.npm 目录保存着大量文件，清空它的命令如下。
+
+```bash
+ rm -rf ~/.npm/\*
+ 或者
+ npm cache clean
+```
 
 ## npm2
 
@@ -137,80 +216,6 @@ ignore 是一个纯 JS 模块，不依赖任何其他模块，而 buffer 又依�
 另外，为了让开发者在安全的前提下使用最新的依赖包，我们在 package.json 通常只会锁定大版本，这意味着在某些依赖包小版本更新后，  
 同样可能造成依赖结构的改动，依赖结构的不确定性可能会给程序带来不可预知的问题。
 
-## npm 命令
-
-### npm update
-
-如果想更新已安装模块，就要用到 npm update 命令。
-
-```bash
-npm update <packageName>
-```
-
-它会先到远程仓库查询最新版本，然后查询本地版本。如果本地版本不存在，或者远程版本较新，就会安装。
-
-远程版本是否较新是由 npm 模块仓库提供的信息  
-[查询服务网址](https://registry.npmjs.org/)
-
-这个网址后面跟上模块名，就会得到一个 JSON 对象，里面是该模块所有版本的信息。  
-比如，访问 https://registry.npmjs.org/react，就会看到 react 模块所有版本的信息。
-
-```bash
-npm view react
-# npm view 的别名
-npm info react
-npm show react
-npm v react
-```
-
-registry 网址的模块名后面，还可以跟上版本号或者标签，用来查询某个具体版本的信息
-返回的 JSON 对象里面，有一个 dist.tarball 属性，是该版本压缩包的网址。
-<img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210624192834.png"  alt="效果图" />
-到这个网址下载压缩包，在本地解压，就得到了模块的源码。  
-npm install 和 npm update 命令，都是通过这种方式安装模块的。
-
-### 缓存目录
-
-npm install 或 npm update 命令，从 registry 下载压缩包之后，都存放在本地的缓存目录。
-这个缓存目录，在 Linux 或 Mac 默认是用户主目录下的.npm 目录，在 Windows 默认是%AppData%/npm-cache。  
-通过配置命令，可以查看这个目录的具体位置`npm config get cache`;
-在这个目录下又存在我们主要关注是两个目录：
-
-- **content-v2**
-  用于存储 tar 包的缓存
-- index-v5，content-v2 目录
-  用于存储 tar 包的 hash。
-  <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210624201056.png"  alt="效果图" />
-
-  {% note info modern %}
-
-  npm 在执行安装时，可以根据 package-lock.json 中存储的 integrity、version、name 生成一个唯一的 key 对应到 index-v5 目录下的缓存记录，  
-  从而找到 tar 包的 hash，然后根据 hash 再去找缓存的 tar 包直接使用。
-  而这样的缓存策略是从 npm v5 版本开始的，在 npm v5 版本之前，每个缓存的模块在 ~/.npm 文件夹中以模块名的形式直接存储，
-  储存结构是{cache}/{name}/{version}。
-
-  {% endnote %}
-
-```
-npm cache ls react
-~/.npm/react/react/0.14.6/
-~/.npm/react/react/0.14.6/package.tgz
-~/.npm/react/react/0.14.6/package/
-~/.npm/react/react/0.14.6/package/package.json
-```
-
-每个模块的每个版本，都有一个自己的子目录，里面是代码的压缩包 package.tgz 文件，以及一个描述文件 package/package.json。
-除此之外，还会生成一个{cache}/{hostname}/{path}/.cache.json 文件。比如，从 npm 官方仓库下载 react 模块的时候，  
-就会生成 registry.npmjs.org/react/.cache.json 文件。
-
-.npm 目录保存着大量文件，清空它的命令如下。
-
-```bash
- rm -rf ~/.npm/\*
- 或者
- npm cache clean
-```
-
 ## package-lock.json 的作用
 
 为了解决 npm install 的不确定性问题(package.json 文件中的语义版本锁定，安装源也不固定)，  
@@ -224,18 +229,7 @@ lock 文件上传到远程仓库时，可能遇到的一些问题和解决方法
 
 package-lock.json 的表现
 
-## 在npm@5.4.2版本后的表现：
-
-1. 无 package-lock.json
-   npm i 根据 package.json 进行安装，并生成 package-lock.json
-
-2. package.json 和 package-lock.json 的版本不兼容
-   npm i 会以 package.json 为准进行安装，并更新 package-lock.json
-
-3. package.json 和 package-lock.json 的版本兼容
-   npm i 会以 package-lock.json 为准进行安装。
-
-## 关于旧的 npm 版本的表现，
+## 关于旧的 npm 版本的表现:
 
 **查阅资料得知，自 npm 5.0 版本发布以来，npm i 的规则发生了三次变化。**
 
@@ -249,11 +243,37 @@ package-lock.json 的表现
 
 最终才有了 **在npm@5.4.2版本后的表现**
 
+## 在npm@5.4.2版本后的表现：
+
+1. 无 package-lock.json
+   npm i 根据 package.json 进行安装，并生成 package-lock.json
+
+2. package.json 和 package-lock.json 的版本不兼容
+   npm i 会以 package.json 为准进行安装，并更新 package-lock.json
+
+3. package.json 和 package-lock.json 的版本兼容
+   npm i 会以 package-lock.json 为准进行安装。
+
+## npm ci
+
+由于以上 5.4.2 版本的第 1、2 点的存在，即使有 package-lock.json 文件，配合 npm i，  
+我们也不能保证线上**构建时的依赖版本与本地开发时的一致**。
+npm ci 是类似于 npm i 的命令。npm ci 与 npm i 主要的差异有：
+
+- 使用 npm ci 的项目必须存在 package-lock.json 或 npm-shrinkwrap.json 文件，否则无法执行
+- 如果 package-lock.json 或 npm-shrinkwrap.json 中的依赖与 package.json 中不一致（即以上 2 的情况），  
+  npm ci 会报错并退出，而不是更新 lock 文件
+- npm ci 只会安装整个项目，无法单独安装某个依赖项目
+- 如果项目中已有 node_modules，该文件夹会在 npm ci 执行安装前自动被移除
+- 该命令不会写入 package.json 或 lock 文件，安装的行为是完全被固定的。
+
+> **基于以上几种特性，使用 npm ci 能够有效防止线上构建的依赖与开发者本地不一致的问题。**
+
 ## npm7
 
 <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628200407.png"  alt="效果图" />
 
-近期 组内的小伙伴有遇到如上的问题乍一看没有遇见过 但是提示却写的非常的明确 提取到 root 里面的 eslint 依赖是eslint@7.29.0  
+近期 组内的小伙伴有遇到如上的问题乍一看不止所云 但是提示却写的非常的明确 提取到 root 里面的 eslint 依赖是eslint@7.29.0  
 而内置的eslint-config-airbnb@18.2.1却希望宿主的 eslint 版本是^5.16.0 || ^6.8.0 || ^7.2.0;
 eslint-plugin-react-hooks@1.7.0希望宿主的 eslint 版本是^3.0.0-^6.0.0;
 二者产生了冲突从而无法建立依赖数报错;
@@ -303,21 +323,6 @@ PATH 环境变量将包含全部的 node_modules/.bin 目录
 ### npx 使用 npm exec 进行重构，并内置在新版本中
 
 ### 支持了 acceptDependencies 声明，允许手工声明覆盖一些包的依赖版本
-
-## npm ci
-
-由于以上 5.4.2 版本的第 1、2 点的存在，即使有 package-lock.json 文件，配合 npm i，  
-我们也不能保证线上**构建时的依赖版本与本地开发时的一致**。
-npm ci 是类似于 npm i 的命令。npm ci 与 npm i 主要的差异有：
-
-- 使用 npm ci 的项目必须存在 package-lock.json 或 npm-shrinkwrap.json 文件，否则无法执行
-- 如果 package-lock.json 或 npm-shrinkwrap.json 中的依赖与 package.json 中不一致（即以上 2 的情况），  
-  npm ci 会报错并退出，而不是更新 lock 文件
-- npm ci 只会安装整个项目，无法单独安装某个依赖项目
-- 如果项目中已有 node_modules，该文件夹会在 npm ci 执行安装前自动被移除
-- 该命令不会写入 package.json 或 lock 文件，安装的行为是完全被固定的。
-
-**基于以上几种特性，使用 npm ci 能够有效防止线上构建的依赖与开发者本地不一致。**
 
 ## 如何解决 package-lock.json 的冲突
 
