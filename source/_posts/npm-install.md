@@ -287,18 +287,23 @@ eslint-plugin-react-hooks@1.7.0希望宿主的 eslint 版本是^3.0.0-^6.0.0;
 - 代码测试覆盖率增加了 54%(npm 7 94% vs npm 6 77%)
 - 因此性能得到了比较大的提升
 
-### 修改 lock
+### 增加 lockfileVersion@2+ 支持 yarn.lock
 
-一个需要注意的改动是新的 lockfile 格式，该格式会向后兼容 npm 6 用户
+> Our new package-lock format will unlock the ability to do deterministically reproducible builds and includes
+> everything npm will need to fully build the package tree. Prior to npm 7 yarn.lock files were ignored, the npm cli
+> can now use yarn.lock as source of package metadata and resolution guidance.
+
+新的 package 格式会解锁 lock 文件能够进行定性且可执行重复构建的能力, 包含构建时所需要的一切;
+
+该格式也会向后兼容 npm 6 用户
 
 在以前的版本中，yarn.lock 文件被忽略，npm CLI 现在可以使用 yarn.lock 作为 package 元数据和依赖的来源。
 如果存在 yarn.lock，则 npm 还将使它与 package 的内容保持最新。
 
 使用 npm 7 并且在有 v1 的 lockfile 的项目中执行 npm install，则会把 lock file 文件的内容取代成 v2 的格式。
 如果想避免这种行为，可以通过执行 npm install --no-save
-自处 v1 和 v2 格式的区别可以埋个坑
 
-### peer dependencies
+### 自动安装 peer dependencies
 
 但和上面提到过的问题息息相关的也就只有这个特性了;
 npm 7 中引入的一项新功能是自动安装 peer dependencies。在 npm 的之前版本（4-6）中，peer dependencies 冲突会有版本不兼容的警告，开发人员需要自己管理和安装 peerDependencies, 有冲突仍会安装依赖并不会抛出错误。但在 npm 7 中，新的 peer dependencies 可确保在 node_modules 树中 peerDependencies 的位置处或之上找到有效匹配的 peerDependencies。如果存在无法自动解决的依赖冲突，将会阻止安装。
@@ -360,3 +365,5 @@ https://www.cnblogs.com/zhaohui-116/p/14285015.html
 https://segmentfault.com/q/1010000011571000
 https://zhuanlan.zhihu.com/p/237532427
 https://github.com/rogeriochaves/npm-force-resolutions/issues
+
+https://github.blog/2020-10-13-presenting-v7-0-0-of-the-npm-cli/
