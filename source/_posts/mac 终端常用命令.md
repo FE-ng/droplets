@@ -95,6 +95,18 @@ inode 你可以理解成 C 语言中的指针。它指向了物理硬盘的一�
 
 可以看到`hard_README.md`硬链接已经成功创建并且 inode 是`36143015`;
 
+执行`ln -s README.md soft_README.md`得到 README.md 的软链接
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210718112246.png"  alt="效果图" />
+
+这样我们容易发现区别 `soft_README.md`文件的 inode 是`38619526` 已经和 README.md 不一致了
+并且文件颜色成为了紫色(每个 shell 根据主题变化)并且有了`soft_README.md -> README.md`箭头符号的指示  
+没错这也就代表着`soft_README.md`仅仅只是个软链接
+
+### so
+
+硬链接： 与普通文件没什么不同，inode 都指向同一个文件在硬盘中的区块
+软链接： 保存了其代表的文件的绝对路径，是另外一种文件形式，在硬盘上有独立的区块，访问时替换自身路径。
+
 ## 选择操作
 
 | 命令名 | 功能描述                     | eg                           |
