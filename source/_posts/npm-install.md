@@ -223,11 +223,26 @@ ignore 是一个纯 JS 模块，不依赖任何其他模块，而 buffer 又依�
 
 在 npm 5.x 版本新增了 package-lock.json 文件，而安装方式还沿用了 npm 3.x 的扁平化的方式。
 
+package-lock 是 package.json 中列出的每个依赖项的大型列表，应安装的特定版本，模块的位置（URI），  
+验证模块完整性的哈希，它需要的包列表 ，以及依赖项列表。
+我们看一个具体的例子
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210719112625.png"  alt="效果图" />
+
+1. name: lock 的包名和 package.json 中的 name 保持一致。
+2. lockfileVersion:
+   lock 文件的版本在 npm7 中有了显著的改变
+   - 没有值: 来自 NPM v5 之前版本的一个历史深远的 shrinkwrap 版本。
+   - 1: npm v5 and v6 执行得到的
+   - 2: npm v7 使用的 lockfile 版本，它向后兼容 v1 的 lockfiles。
+   - 3: npm v7 创建而成, 不再向后兼容.不维护 v6 的版本后就会在未来使用, 该文件将会被隐藏路径成为`node_modules/.package-lock.json`
+3. version: 指模块的版本;
+4. resolved: 模块的下载地址
+5. integrity: 模块的 hash 值用于校验完整性
+6. requires: 依赖
+
 对于是否将 package-lock.json 文件上传到远程仓库，也有许多有趣的讨论，  
 **[例如 package-lock.json 需要写进 .gitignore 吗？](https://www.zhihu.com/question/264560841)**
 lock 文件上传到远程仓库时，可能遇到的一些问题和解决方法。
-
-package-lock.json 的表现
 
 ## 关于旧的 npm 版本的表现:
 
