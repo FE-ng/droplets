@@ -51,5 +51,20 @@
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["cacache", "dumi", "jsbarcode", "otms", "sccoms", "tblh", "umijs", "umirc", "yapi"]
+  "cSpell.words": [
+    "cacache",
+    "dumi",
+    "jsbarcode",
+    "lockfiles",
+    "loglevel",
+    "npmcli",
+    "otms",
+    "pacote",
+    "sccoms",
+    "shasum",
+    "tblh",
+    "umijs",
+    "umirc",
+    "yapi"
+  ]
 }
