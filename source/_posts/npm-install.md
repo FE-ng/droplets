@@ -462,6 +462,10 @@ package-lock.json 文件不由开发者自行写入，在协同开发时，某�
 
 ## pnpm
 
+目前 GitHub 已经有近 12k 的 star ，并且已经相对成熟且稳定了。它由 npm/yarn 衍生而来，但却解决了 npm/yarn 内部潜在的 bug，并且极大了地优化了性能，扩展了使用场景
+
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210726145050.png"  alt="效果图" />
+
 > Fast, disk space efficient package manager
 
 因此，pnpm 本质上就是一个包管理器，这一点跟 npm/yarn 没有区别，但它作为杀手锏的两个优势在于:
@@ -474,19 +478,74 @@ package-lock.json 文件不由开发者自行写入，在协同开发时，某�
 npm i -g pnpm
 ```
 
+### 安装速度快
+
+pnpm 安装包的速度究竟有多快？先以 React 包为例来对比一下:
+
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210726145206.png"  alt="效果图" />
+
+可以看到，作为黄色部分的 pnpm，在绝多大数场景下，包安装的速度都是明显优于 npm/yarn，速度会比 npm/yarn 快 2-3 倍。
+对 yarn 比较熟悉的同学可能会说，yarn 不是有 [PnP 安装模式](https://classic.yarnpkg.com/en/docs/pnp/)吗？
+
+> 直接去掉 node_modules，将依赖包内容写在磁盘，节省了 node 文件 I/O 的开销，这样也能提升安装速度。（具体原理见这篇文章(https://loveky.github.io/2019/02/11/yarn-pnp/)）
+
+接下来，我们以这样一个[仓库](https://github.com/pnpm/benchmarks-of-javascript-package-managers)为例，我们来看一看 benchmark 数据，主要对比一下 pnpm 和 yarn PnP:
+
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210726145507.png"  alt="效果图" />
+
+从中可以看到，总体而言，pnpm 的包安装速度还是明显优于 yarn PnP 的。
+
+### 磁盘使用高效
+
+pnpm 内部使用基于内容寻址的文件系统来存储磁盘上所有的文件，这个文件系统出色的地方在于:
+
+> 不会重复安装同一个包。用 npm/yarn 的时候，如果 100 个项目都依赖 lodash，那么 lodash 很可能就被安装了 100 次，磁盘中就有 100 个地方写入了这部分代
+> 码。但在使用 pnpm 只会安装一次，磁盘中只有一个地方写入，后面再次使用都会直接使用 [hardlink](https://droplets.vercel.app/56693d8f9f77/#“软链接”和“硬链接”);
+
+即使一个包的不同版本，pnpm 也会极大程度地复用之前版本的代码。举个例子，比如 lodash 有 100 个文件，更新版本之后多了一个文件，那么磁盘当中并不会重新写入 101 个文件，而是保留原来的 100 个文件的 hardlink，仅仅写入那一个新增的文件。
+
+### 依赖管理
+
 从之前对 npm 发展和遇到的问题 (buffer,buffer2 依赖) 我们可以知道
 一些共同依赖的不同版本在 package.json 中的位置会影响最终的构建结果，
 这是为什么会产生依赖结构的不确定的问题所在，也是 lock 文件诞生的原因;
 但无论是 package-lock.json(npm 5.x 才出现)还是 yarn.lock，都是为了保证 install 之后都产生确定的 node_modules 结构。
 尽管如此，npm/yarn 本身还是存在扁平化算法复杂和 package 非法访问的问题，影响性能和安全。
 
-### 依赖管理
-
 pnpm 的作者`Zoltan Kochan`发现 yarn 并没有打算去解决上述的这些问题，于是另起炉灶，写了全新的包管理器，开创了一套新的依赖管理机制.
 
-软链接
+真正的文件都在.pnpm 中
+目录结构都是<package-name>@version/node_modules/<package-name>。
+.pnpm 目录下虽然呈现的是扁平的目录结构，但仔细想想，顺着软链接慢慢展开，其实就是嵌套的结构！
 
-参考文献
+> 将包本身和依赖放在同一个 node_module 下面，与原生 Node 完全兼容，又能将 package 与相关的依赖很好地组织到一起，设计十分精妙。
+
+现在来看根目录下的 node_modules 下面不再是眼花缭乱的依赖，而是跟 package.json 声明的依赖基本保持一致。即使 pnpm 内部有一些包会设置依赖提升，被提升到根目录 node_modules 当中，但整体上，根目录的 node_modules 比以前还是清晰和规范了许多。
+
+### 安全
+
+pnpm 这种依赖管理的方式也很巧妙地规避了非法访问依赖的问题，也就是只要一个包未在 package.json 中声明依赖，那么在项目中是无法访问的
+
+但在 npm/yarn 当中是做不到的，那你可能会问了，如果 A 依赖 B， B 依赖 C，那么 A 就算没有声明 C 的依赖，由于有依赖提升的存在，C 被装到了 A 的 node_modules 里面，那我在 A 里面用 C，跑起来没有问题呀，我上线了之后，也能正常运行啊。不是挺安全的吗？
+
+还真不是。
+
+第一，你要知道 B 的版本是可能随时变化的，假如之前依赖的是C@1.0.1，现在发了新版，新版本的 B 依赖 C@2.0.1，那么在项目 A 当中 npm/yarn install 之后，装上的是 2.0.1 版本的 C，而 A 当中用的还是 C 当中旧版的 API，可能就直接报错了。
+
+第二，如果 B 更新之后，可能不需要 C 了，那么安装依赖的时候，C 都不会装到 node_modules 里面，A 当中引用 C 的代码直接报错。
+
+还有一种情况，在 monorepo 项目中，如果 A 依赖 X，B 依赖 X，还有一个 C，它不依赖 X，但它代码里面用到了 X。由于依赖提升的存在，npm/yarn 会把 X 放到根目录的 node_modules 中，这样 C 在本地是能够跑起来的，因为根据 node 的包加载机制，它能够加载到 monorepo 项目根目录下的 node_modules 中的 X。但试想一下，一旦 C 单独发包出去，用户单独安装 C，那么就找不到 X 了，执行到引用 X 的代码时就直接报错了。
+
+这些，都是依赖提升潜在的 bug。如果是自己的业务代码还好，试想一下如果是给很多开发者用的工具包，那危害就非常严重了。
+
+npm 也有想过去解决这个问题，指定--global-style 参数即可禁止变量提升，但这样做相当于回到了当年嵌套依赖的时代，一夜回到解放前，前面提到的嵌套依赖的缺点仍然暴露无遗。
+
+npm/yarn 本身去解决依赖提升的问题貌似很难完成，不过社区针对这个问题也已经有特定的解决方案: dependency-check，地址: https://github.com/dependency-check-team/dependency-check
+
+但不可否认的是，pnpm 做的更加彻底，独创的一套依赖管理方式不仅解决了依赖提升的安全问题，还大大优化了时间和空间上的性能。
+
+## 参考文献
+
 链接：[一些 package-lock.json 的小知识](https://juejin.cn/post/6844904116108410887)
 链接：https://www.zhihu.com/question/62331583/answer/275248129
 
@@ -508,3 +567,4 @@ https://github.com/rogeriochaves/npm-force-resolutions/issues
 
 https://github.blog/2020-10-13-presenting-v7-0-0-of-the-npm-cli/
 [npm docs](https://docs.npmjs.com/)
+https://jishuin.proginn.com/p/763bfbd3bcff
