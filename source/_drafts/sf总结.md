@@ -7,7 +7,7 @@ tags:
 <!--
  * @Author: your name
  * @Date: 2021-07-28 14:07:53
- * @LastEditTime: 2021-07-28 15:09:14
+ * @LastEditTime: 2021-07-28 16:16:39
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_drafts/sf总结.md
@@ -26,7 +26,265 @@ datahub
 
 # otms
 
-技术: react antd-v3 git-modules redux redux-saga styled-components typescript webpack react-intl react-selector
+技术: react antd-v3 git-modules redux redux-saga styled-components typescript webpack react-intl reselect
+
+# sccoms
+
+技术: react antd-v4 redux redux-saga styled-components typescript webpack react-intl reselect
+贡献:
+
+- 业务代码
+- 主动使用 react-tooltip 帮助组内成员处理 antd 列表 tooltip 提示
+- 添加 react-dev-inspector 构建项目,开发时能快速定位问题组件
+
+```tsx
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+import * as FontFaceObserver from 'fontfaceobserver';
+import history from 'utils/history';
+import { AppContainer } from 'react-hot-loader';
+import { Inspector } from 'react-dev-inspector';
+// A CSS library that provides consistent, cross-browser default styling of HTML elements alongside useful defaults.
+import 'sanitize.css/sanitize.css';
+
+// Import Language Provider
+import LanguageProvider from 'containers/LanguageProvider';
+
+// Check Version
+import BuildVersion from 'utils/checkBuildVersion';
+
+// Load the favicon and the .htaccess file
+import '!file-loader?name=[name].[ext]!./static/images/favicon.ico';
+import 'file-loader?name=.htaccess!./.htaccess'; // eslint-disable-line import/extensions
+
+import { configureAppStore } from 'store/configureStore';
+
+// Import Longan
+import loadLongan from 'utils/loadLongan';
+
+// Import root app
+import App from './pages/Layout';
+
+// Import i18n messages
+import { translationMessages } from './i18n';
+
+// Import root app
+// import App from './AppRouter';
+
+// Import global style
+import './styles/index.less';
+
+loadLongan();
+
+if (process.env.NODE_ENV === 'production') {
+  // 版本检查
+  const buildVersion = BuildVersion.getInstance(process.env.BUILD_VERSION as any);
+  buildVersion.init();
+}
+interface ITranslationMessages {
+  'en-US': {
+    [key: string]: string;
+  };
+  'zh-CN': {
+    [key: string]: string;
+  };
+}
+
+// Observe loading of Open Sans (to remove open sans, remove the <link> tag in
+// the index.html file and this observer)
+const openSansObserver = new FontFaceObserver('Open Sans', {});
+
+// When Open Sans is loaded, add a font-family using Open Sans to the body
+openSansObserver.load().then(() => {
+  document.body.classList.add('fontLoaded');
+});
+
+// Create redux store with history
+const store = configureAppStore();
+const MOUNT_NODE = document.getElementById('app');
+
+// 进行组件路径注入并提示
+const InspectorWrapper = process.env.NODE_ENV === 'development' ? Inspector : React.Fragment;
+// eslint-disable-next-line no-console
+const inspectorTips = () =>
+  console.log(
+    "%c组件路径已注入, 使用'shift+'command+'l'即可查看组件路径",
+    'color:#3ae917; font-size:14px;line-height:30px;',
+  );
+// eslint-disable-next-line no-unused-expressions
+process.env.NODE_ENV === 'development' && inspectorTips();
+
+const render = (messages: ITranslationMessages): void => {
+  ReactDOM.render(
+    <InspectorWrapper keys={['shift', 'command', 'l']}>
+      <Provider store={store}>
+        <AppContainer>
+          <LanguageProvider messages={messages}>
+            <ConnectedRouter history={history}>
+              <App />
+            </ConnectedRouter>
+          </LanguageProvider>
+        </AppContainer>
+      </Provider>
+    </InspectorWrapper>,
+    MOUNT_NODE,
+  );
+};
+
+// eslint-disable-next-line
+if ((module as any).hot) {
+  // 注意需要依赖@types/webpack-env这个包
+  // Hot reloadable React components and translation json files
+  // modules.hot.accept does not accept dynamic dependencies,
+  // have to be constants at compile-time
+  // eslint-disable-next-line
+  (module as any).hot.accept(['./i18n', 'pages/Layout', './AppRouter.tsx'], () => {
+    ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+    render(translationMessages);
+  });
+}
+render(translationMessages);
+
+// Install ServiceWorker and AppCache in the end since
+// it's not most important operation and if main code fails,
+// we do not want it installed
+// if (process.env.NODE_ENV === 'production') {
+//   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
+// }
+```
+
+- 使用排 plop 添加快速搭建模板
+
+```js
+const fs = require('fs');
+
+module.exports = function (plop) {
+  plop.setGenerator('newPage', {
+    // 这里的 test 是一个自己设定的名字，在执行命令行的时候会用到
+    description: '新增一个页面(包含查询项 表格 弹窗)', // 这里是对这个plop的功能描述
+    prompts: [
+      {
+        type: 'input', // 问题的类型
+        name: 'pageName', // 问题对应得到答案的变量名，可以在actions中使用该变量
+        message: '请输入新页面的Key(大驼峰)', // 在命令行中的问题
+        validate(val) {
+          const filterVal = val.trim();
+          if (!filterVal || !/[A-Z]/.test(filterVal[0])) {
+            return '请输入新页面的Key(大驼峰)';
+          }
+          const dir = new Set(fs.readdirSync('src/pages'));
+          if (dir.has(val)) {
+            return `项目中已经存在以 ${val} 命名的页面!`;
+          }
+          return true;
+        },
+        filter(val) {
+          return val.trim().replace(/w/, (i) => i.toUpperCase());
+        },
+      },
+      {
+        type: 'input', // 问题的类型
+        name: 'pageNameCn', // 问题对应得到答案的变量名，可以在actions中使用该变量
+        message: '请输入新页面的名称', // 在命令行中的问题
+        validate(val) {
+          const filterVal = val.trim();
+          return filterVal ? true : '请输入新页面的名称';
+        },
+        filter(val) {
+          return val.trim();
+        },
+      },
+    ],
+    actions: (data) => {
+      const { pageName, pageNameCn } = data;
+      const actions = [
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/constants.ts`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/constants.hbs', // 模板的路径
+          data: {
+            name: pageName,
+          },
+        },
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/index.tsx`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/index.hbs', // 模板的路径
+        },
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/messages.ts`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/messages.hbs', // 模板的路径
+        },
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/types.ts`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/types.hbs', // 模板的路径
+        },
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/saga.ts`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/sagas.hbs', // 模板的路径
+        },
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/selectors.ts`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/selectors.hbs', // 模板的路径
+        },
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/services.ts`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/services.hbs', // 模板的路径
+        },
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/slice.ts`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/slice.hbs', // 模板的路径
+        },
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/modules/FormTable.tsx`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/FormTable.hbs', // 模板的路径
+          data: {
+            name: pageName,
+          },
+        },
+        {
+          type: 'add', // 操作类型，这里是添加文件
+          path: `src/pages/${pageName}/modules/Modal.tsx`, // 模板生成的路径
+          templateFile: 'config/plop-templates/pages/Modal.hbs', // 模板的路径
+        },
+        {
+          type: 'modify', // 操作类型，修改
+          path: `src/utils/messages.ts`, // 模板生成的路径
+          pattern: /(\/\/ -- APPEND HERE --)/gi,
+          template: `${pageName}: {
+    id: \`\${scope}.menu.${pageName}\`,
+    defaultMessage: '${pageNameCn}',
+  },\r\n  $1`, // 模板的路径
+        },
+        {
+          type: 'modify', // 修改
+          path: `src/configs/dev.router.conf.tsx`, // 模板生成的路径
+          pattern: /(\/\/ -- APPEND HERE --)/gi,
+          template: `{
+    path: '${pageName}',
+    image: getImagePath(menuImageMap.default),
+    name: '${pageNameCn}',
+  },\r\n  $1`, // 模板的路径
+        },
+      ];
+      return actions;
+    },
+  });
+};
+```
+
+- 规范 eslint 规则
+- 规范 commitlint,添加 husky 等强校验
+- 规则组件重构
 
 # 分享内容
 
