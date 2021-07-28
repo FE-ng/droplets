@@ -116,3 +116,300 @@ github 地址：[https://github.com/bvaughn/react-virtualized](https://github.co
 demo 地址：[https://bvaughn.github.io/react-virtualized/#/components/Grid](https://bvaughn.github.io/react-virtualized/#/components/Grid)
 
 源代码分析：[https://github.com/dwqs/blog/issues/72](https://github.com/dwqs/blog/issues/72)
+
+<!-- 此篇乃小伙伴们在花式踩坑 ant-design 的 Table 组件后，总结的专治对不齐的十全大补丸，望君趁早服用及时康复，如果你还踩出了更多花样对不齐，欢迎臭 jio 的你前来补充。 -->
+
+### 文章目录
+
+- [一：问题概览](https://mp.csdn.net/mdeditor/94007661#_3)
+- [二：问题详细描述及 demo](https://mp.csdn.net/mdeditor/94007661#demo_15)
+
+- [1.纵向/列对不齐](https://mp.csdn.net/mdeditor/94007661#1_17)
+
+- [1.1.有列(column)没有设置宽度：表头固定时，导致表头宽度计算错误，表头列和内容列对不齐](https://mp.csdn.net/mdeditor/94007661#11column_19)
+- [1.2.语句/单词过长： antd 根据语义/单词断句换行，实际列宽超出了设置的宽度，导致列对不齐；](https://mp.csdn.net/mdeditor/94007661#12_antd_22)
+- [1.3.开启了单选功能：单选列表头宽度计算错误，导致列对不齐](https://mp.csdn.net/mdeditor/94007661#13_27)
+
+- [2.横向/行对不齐](https://mp.csdn.net/mdeditor/94007661#2_30)
+
+- [2.1.固定(fixed)列的高度高于普通列：普通列的高度与 fixed 列的高度不同，导致行对不齐；反之没问题](https://mp.csdn.net/mdeditor/94007661#21fixedfixed_31)
+
+- [3.列间有空白间隙/留白](https://mp.csdn.net/mdeditor/94007661#3_34)
+
+- [3.1.列数不固定、需适配不同尺寸屏幕：需适配 4 种情况：小屏列少、小屏列多、大屏列少、大屏列多](https://mp.csdn.net/mdeditor/94007661#314_35)
+- [3.2.scroll.x 计算错误:](https://mp.csdn.net/mdeditor/94007661#32scrollx_44)
+
+- [4.双滚动条](https://mp.csdn.net/mdeditor/94007661#4_53)
+
+- [4.1.macOS 在系统偏好设置为 “显示滚动条-滚动时”会出现双滚动条](https://mp.csdn.net/mdeditor/94007661#41macOS__54)
+
+- [三：解决方案代码](https://mp.csdn.net/mdeditor/94007661#_58)
+
+- [1.纵向/列对不齐](https://mp.csdn.net/mdeditor/94007661#1_60)
+
+- [1.1.有列(column)没有设置宽度： 为所有 column 设置 width（或统一赋默认值）](https://mp.csdn.net/mdeditor/94007661#11column_columnwidth_61)
+- [1.2.语句/单词过长：](https://mp.csdn.net/mdeditor/94007661#12_65)
+- [1.3.开启了单选功能](https://mp.csdn.net/mdeditor/94007661#13_78)
+
+- [2.横向/行对不齐](https://mp.csdn.net/mdeditor/94007661#2_81)
+
+- [2.1.固定(fixed)列的高度高于普通列](https://mp.csdn.net/mdeditor/94007661#21fixed_82)
+
+- [3.列间有空白间隙/留白](https://mp.csdn.net/mdeditor/94007661#3_96)
+
+- [3.1.列数不固定、需适配不同尺寸屏幕：动态设置 fixed，比较列总宽与 table 宽度](https://mp.csdn.net/mdeditor/94007661#31fixedtable_97)
+- [3.2.scroll.x 计算错误: 设置 scroll.x 为所有列的总宽度，包括 fixed 列.](https://mp.csdn.net/mdeditor/94007661#32scrollx_scrollxfixed_125)
+
+- [4.双滚动条](https://mp.csdn.net/mdeditor/94007661#4_132)
+
+- [4.1.macOS 在系统偏好设置为 “显示滚动条-滚动时”会出现双滚动条: 自定义滚动条， 滚动条常显](https://mp.csdn.net/mdeditor/94007661#41macOS____133)
+
+# 一：问题概览
+
+序号
+
+异常表现
+
+产生原因
+
+解决方案
+
+1
+
+1.纵向/列对不齐
+
+1.1.有列(column)没有设置宽度
+
+为所有 column 设置 width
+
+2
+
+1.2.语句/单词过长
+
+打破语句与单词，强制折行
+
+3
+
+1.3.开启了单选功能
+
+给单选的表头添加文字，例如“单选”，撑开表头
+
+4
+
+2.横向/行对不齐
+
+2.1.固定(fixed)列的高度高于普通列
+
+1.左侧 fixed 不对齐：检查是否 rowkey 唯一 2.右侧 fixed 不对齐：解决方案 PR 审核中
+
+5
+
+3.列间有空白间隙/留白
+
+3.1.列数不固定、需适配不同尺寸屏幕
+
+动态设置 fixed，比较列总宽与 table 宽度
+
+6
+
+3.2.scroll.x 计算错误
+
+设置 scroll.x 为所有列的总宽度，包括 fixed 列
+
+7
+
+4.双滚动条
+
+4.1.macOS 在系统偏好设置为 “显示滚动条-滚动时”会出现双滚动条
+
+自定义滚动条， 滚动条常显
+
+# 二：问题详细描述及 demo
+
+## 1.纵向/列对不齐
+
+##### 1.1.有列(column)没有设置宽度：表头固定时，导致表头宽度计算错误，表头列和内容列对不齐
+
+![](http://wiki.sftcwl.com/download/attachments/24183867/image.png?version=1&modificationDate=1561712771000&api=v2 'SFTC-FE > ant-design Table组件错位/对不齐 > image.png')
+
+##### 1.2.语句/单词过长： antd 根据语义/单词断句换行，实际列宽超出了设置的宽度，导致列对不齐；
+
+错误 demo❌  
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628151718818.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Jhb3podW9uYQ==,size_16,color_FFFFFF,t_70)  
+正确 demo✅  
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628151745239.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Jhb3podW9uYQ==,size_16,color_FFFFFF,t_70)
+
+##### 1.3.开启了单选功能：单选列表头宽度计算错误，导致列对不齐
+
+![](http://wiki.sftcwl.com/download/thumbnails/24183867/3.png?version=1&modificationDate=1561712913000&api=v2 'SFTC-FE > ant-design Table组件错位/对不齐 > 3.png')
+
+## 2.横向/行对不齐
+
+##### 2.1.固定(fixed)列的高度高于普通列：普通列的高度与 fixed 列的高度不同，导致行对不齐；反之没问题
+
+![](http://wiki.sftcwl.com/download/thumbnails/24183867/4.png?version=1&modificationDate=1561712921000&api=v2 'SFTC-FE > ant-design Table组件错位/对不齐 > 4.png')
+
+## 3.列间有空白间隙/留白
+
+##### 3.1.列数不固定、需适配不同尺寸屏幕：需适配 4 种情况：小屏列少、小屏列多、大屏列少、大屏列多
+
+为了适配小屏多列，我们会 fixed 某些列，column 设置的 width 由比例变为 px。  
+当切到大屏时，同样列数宽度可能铺不满表格
+
+小屏多列，适合 fixed demo✅
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628151832578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Jhb3podW9uYQ==,size_16,color_FFFFFF,t_70)  
+大屏同样列数，留白 demo❌  
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628152032964.png)
+
+##### 3.2.scroll.x 计算错误:
+
+antd 文档：
+
+> 建议指定 scroll.x 为大于表格宽度的固定值或百分比。注意，且非固定列宽度之和不要超过 scroll.x
+
+个人建议：设置 scroll.x 为所有列的总宽度，包括 fixed 列.
+
+（这里有一条我们自己系统的代码需要检查的点：检查 TableContainer 组件是否留有 buffer，有的话移除）  
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628151856882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Jhb3podW9uYQ==,size_16,color_FFFFFF,t_70)
+
+## 4.双滚动条
+
+##### 4.1.macOS 在系统偏好设置为 “显示滚动条-滚动时”会出现双滚动条
+
+![](http://wiki.sftcwl.com/download/thumbnails/24183867/image9.png?version=2&modificationDate=1561713000000&api=v2 'SFTC-FE > ant-design Table组件错位/对不齐 > image9.png')
+
+# 三：解决方案代码
+
+## 1.纵向/列对不齐
+
+##### 1.1.有列(column)没有设置宽度： 为所有 column 设置 width（或统一赋默认值）
+
+```
+const width = item.width || 100;
+```
+
+##### 1.2.语句/单词过长：
+
+a.打破语句与单词，强制折行;
+
+```
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+  padding: 16px 16px;
+  word-break: break-word;
+  -ms-word-break: break-all;
+}
+```
+
+b.当 column 自定义了 render，并在 render 中嵌套了 dom 元素,需在 dom 内联样式中设置
+
+```
+ word-break: break-word；
+```
+
+##### 1.3.开启了单选功能
+
+给单选的表头添加文字，例如 demo 中的“单选”，撑开表头
+
+## 2.横向/行对不齐
+
+##### 2.1.固定(fixed)列的高度高于普通列
+
+a. 左侧 fixed 不对齐：确保 rowKey 唯一性。  
+当 row 无唯一 key 时，rowkey 值用 random 或 new Date()方式生成，虽然不会再报错 rowKey 不唯一，但是因为是动态数据，导致无法找到指定 fixed tr 为其添加 height 值。  
+产生问题代码
+
+```
+handlerowKey(value: string) {
+  return new Date().toDateString() + Math.random() + value;
+}
+```
+
+b. 右侧 fixed 不对齐：解决方案 PR 审核中  
+[https://github.com/ant-design/ant-design/issues/14859](https://github.com/ant-design/ant-design/issues/14859)  
+[https://github.com/react-component/table/pull/283](https://github.com/react-component/table/pull/283)
+
+## 3.列间有空白间隙/留白
+
+##### 3.1.列数不固定、需适配不同尺寸屏幕：动态设置 fixed，比较列总宽与 table 宽度
+
+```
+<Table
+  bordered={true}
+  loading={loading}
+  columns={this.state.columns}
+  dataSource={sortTableData ||  tableData}
+  rowKey="tc_code"
+  pagination={false}
+  scroll={{ x: this.state.scrollWidth}}
+  ref={(ref) => { this.refDom = ref; }}
+/>
+// 获取table宽度
+const $tableContainer = ReactDom.findDOMNode(this.refDom);
+const tableWidth = ($tableContainer as any).offsetWidth;
+// 获取滚动总宽度
+
+const = columnNum * columnWidth;
+{
+  title: this.props.intl.formatMessage(messages.tc_list),
+  dataIndex: 'tc_code',
+  key: 'tc_code',
+  fixed: scrollWidth > this.state.tableWidth ? 'left' : '',
+  width: 150,
+}
+```
+
+（我们系统代码实现可参考 sds tcDataChart 模块）
+
+##### 3.2.scroll.x 计算错误: 设置 scroll.x 为所有列的总宽度，包括 fixed 列.
+
+（我们的系统代码：检查 TableContainer 组件是否留有 buffer，有的话移除）
+
+```
+// 预留20 buffer
+this.x = this.x + 20;
+```
+
+## 4.双滚动条
+
+##### 4.1.macOS 在系统偏好设置为 “显示滚动条-滚动时”会出现双滚动条: 自定义滚动条， 滚动条常显
+
+```
+::-webkit-scrollbar{
+  width:12px;
+  height:12px;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: #f8f8f8;
+}
+::-webkit-scrollbar-thumb{
+  border: 3px solid #f6f6f6;
+  background-color: #ccc;
+  -webkit-border-radius:20px;
+}
+::-webkit-scrollbar-thumb:active{
+  -webkit-border-radius:20px;
+  background-color: #7f7f7f;
+}
+::-webkit-scrollbar-corner {
+  background-color: #f6f6f6;
+  -webkit-border-bottom-right-radius: 5px;
+}
+
+.navigation::-webkit-scrollbar {
+  width: 3px;
+  height: 0px;
+}
+.navigation::-webkit-scrollbar-button {
+  display: none;
+}
+.navigation::-webkit-scrollbar-track-piece {
+  background-color: #404040;
+}
+.navigation::-webkit-scrollbar-thumb {
+  border: 1px solid rgb(52, 143, 247);
+  background-color: rgb(52, 143, 247);
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+```
