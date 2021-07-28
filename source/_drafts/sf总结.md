@@ -7,7 +7,7 @@ tags:
 <!--
  * @Author: your name
  * @Date: 2021-07-28 14:07:53
- * @LastEditTime: 2021-07-28 16:16:39
+ * @LastEditTime: 2021-07-28 17:04:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_drafts/sf总结.md
@@ -24,9 +24,18 @@ sccoms
 datahub
 毫末智能车监控系统
 
+建立了自己的博客, 开始维护美化自己的 github
+发布 lint 工具 lint-lf
+发布了 eslint 规则包
+使用 plop 实现 low code
+贡献 any-rules
+贡献 vscode 退出校验功能
+建立了自己的脚手架工具 集成了 webpack 配置
+
 # otms
 
 技术: react antd-v3 git-modules redux redux-saga styled-components typescript webpack react-intl reselect
+贡献: 主要致力于处理业务逻辑,了解物流,供应链
 
 # sccoms
 
@@ -285,6 +294,70 @@ module.exports = function (plop) {
 - 规范 eslint 规则
 - 规范 commitlint,添加 husky 等强校验
 - 规则组件重构
+- 版本更新提示
+
+```ts
+const child_process = require('child_process');
+const moment = require('moment');
+let versionInfo = {};
+const buildDate = moment().format('YYYY-MM-DD HH:mm:ss');
+try {
+  // git 最后一次提交的 Head
+  const commit = child_process.execSync('git show -s --format=%H').toString().trim();
+  // / git 最后一次提交的 userName
+  const commitUserName = child_process.execSync('git show -s --format=%cn').toString().trim();
+  //  git 最后一次提交的 userMail
+  const commitUserMail = child_process.execSync('git show -s --format=%ce').toString().trim();
+  const commitDateObj = new Date(child_process.execSync(`git show -s --format=%cd`).toString());
+  //  git 最后一次提交的时间
+  const commitDate = moment(commitDateObj).format('YYYY-MM-DD HH:mm:ss');
+  //  打包构建的userName
+  const buildUserName = child_process.execSync('git config user.name').toString().trim();
+  //  打包构建的userMail
+  const buildUserMail = child_process.execSync('git config user.email').toString().trim();
+
+  versionInfo = { commit, commitUserName, commitUserMail, commitDate, buildUserName, buildUserMail, buildDate };
+} catch (error) {
+  versionInfo = {
+    commit: '',
+    commitUserName: '',
+    commitUserMail: '',
+    commitDate: '',
+    buildUserName: '',
+    buildUserMail: '',
+    buildDate,
+  };
+}
+console.log('构建信息:');
+console.table(versionInfo);
+
+module.exports = { ...versionInfo };
+```
+
+```ts
+const GenerateJsonPlugin = require('generate-json-webpack-plugin');
+const webpack = require('webpack');
+const buildVersion = require('../scripts/buildVersion.js');
+
+module.exports = {
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        PROJECT_ENV: JSON.stringify(process.env.PROJECT_ENV),
+        BUILD_VERSION: JSON.stringify(buildVersion),
+      },
+    }),
+    new GenerateJsonPlugin('static/buildVersion.json', {
+      data: buildVersion,
+      errmsg: '',
+      errno: 0,
+    }),
+  ],
+  // Emit a source map for easier debugging
+  // See https://webpack.js.org/configuration/devtool/#devtool
+  devtool: 'source-map',
+};
+```
 
 # 分享内容
 
