@@ -230,24 +230,24 @@ demo 地址：[https://bvaughn.github.io/react-virtualized/#/components/Grid](ht
 
 ##### 1.1.有列(column)没有设置宽度：表头固定时，导致表头宽度计算错误，表头列和内容列对不齐
 
-![](http://wiki.sftcwl.com/download/attachments/24183867/image.png?version=1&modificationDate=1561712771000&api=v2 'SFTC-FE > ant-design Table组件错位/对不齐 > image.png')
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728154214.png"  alt="效果图" />
 
 ##### 1.2.语句/单词过长： antd 根据语义/单词断句换行，实际列宽超出了设置的宽度，导致列对不齐；
 
 错误 demo❌  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628151718818.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Jhb3podW9uYQ==,size_16,color_FFFFFF,t_70)  
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728154255.png"  alt="效果图" />
 正确 demo✅  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628151745239.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Jhb3podW9uYQ==,size_16,color_FFFFFF,t_70)
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728154314.png"  alt="效果图" />
 
 ##### 1.3.开启了单选功能：单选列表头宽度计算错误，导致列对不齐
 
-![](http://wiki.sftcwl.com/download/thumbnails/24183867/3.png?version=1&modificationDate=1561712913000&api=v2 'SFTC-FE > ant-design Table组件错位/对不齐 > 3.png')
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728154330.png"  alt="效果图" />
 
 ## 2.横向/行对不齐
 
 ##### 2.1.固定(fixed)列的高度高于普通列：普通列的高度与 fixed 列的高度不同，导致行对不齐；反之没问题
 
-![](http://wiki.sftcwl.com/download/thumbnails/24183867/4.png?version=1&modificationDate=1561712921000&api=v2 'SFTC-FE > ant-design Table组件错位/对不齐 > 4.png')
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728154344.png"  alt="效果图" />
 
 ## 3.列间有空白间隙/留白
 
@@ -258,9 +258,9 @@ demo 地址：[https://bvaughn.github.io/react-virtualized/#/components/Grid](ht
 
 小屏多列，适合 fixed demo✅
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628151832578.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Jhb3podW9uYQ==,size_16,color_FFFFFF,t_70)  
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728154356.png"  alt="效果图" />
 大屏同样列数，留白 demo❌  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628152032964.png)
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728154406.png"  alt="效果图" />
 
 ##### 3.2.scroll.x 计算错误:
 
@@ -271,13 +271,13 @@ antd 文档：
 个人建议：设置 scroll.x 为所有列的总宽度，包括 fixed 列.
 
 （这里有一条我们自己系统的代码需要检查的点：检查 TableContainer 组件是否留有 buffer，有的话移除）  
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190628151856882.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2Jhb3podW9uYQ==,size_16,color_FFFFFF,t_70)
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728154426.png"  alt="效果图" />
 
 ## 4.双滚动条
 
 ##### 4.1.macOS 在系统偏好设置为 “显示滚动条-滚动时”会出现双滚动条
 
-![](http://wiki.sftcwl.com/download/thumbnails/24183867/image9.png?version=2&modificationDate=1561713000000&api=v2 'SFTC-FE > ant-design Table组件错位/对不齐 > image9.png')
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728154437.png"  alt="效果图" />
 
 # 三：解决方案代码
 
