@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-21 15:53:08
- * @LastEditTime: 2021-06-21 16:24:18
+ * @LastEditTime: 2021-07-28 14:04:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_posts/test/Lint.md
@@ -120,3 +120,66 @@ https://segmentfault.com/a/1190000022809751
 https://johninch.github.io/2019/12/12/eslintPrettier/
 
 https://juejin.cn/post/6950084849180868622
+
+## 规则处理
+
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210728135722.png"  alt="效果图" />
+
+max-len / object-curly-newline
+函数参数对象解构时 当参数>=4 时 现规则不允许一行书写，强制换行；建议放宽参数数量限制到 6 个 同时配合 max-len 约束单行长度 保证 6 个参数以内不超长的情况下允许单行书写
+
+```javascript
+'object-curly-newline': ['error', {
+ObjectExpression: { minProperties: 6, multiline: true, consistent: true },
+ObjectPattern: { minProperties: 6, multiline: true, consistent: true },
+ImportDeclaration: { minProperties: 6, multiline: true, consistent: true },
+ExportDeclaration: { minProperties: 6, multiline: true, consistent: true },
+}],
+
+'max-len': 保持 airbnb 一致即可
+```
+
+'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+vue/component-name-in-template-casing
+no-param-reassign
+添加白名单
+
+```javascript
+
+'no-param-reassign': ['error', {
+props: true,
+ignorePropertyModificationsFor: [
+'acc', // for reduce accumulators
+'accumulator', // for reduce accumulators
+'e', // for e.returnvalue
+'ctx', // for Koa routing
+'req', // for Express requests
+'request', // for Express requests
+'res', // for Express responses
+'response', // for Express responses
+'$scope', // for Angular 1 scopes
+'staticContext', // for ReactRouter context
+
+'Vue', // for Vue plugin
+
+'state', // for VueX mutations
+
+]
+
+}],
+```
+
+radix
+parseInt 函数必须填写基数
+大部分使用情况是 10 进制 ， parseInt 默认基数也是 10 可以把配置改为 'radix'改为
+'radix': ['error, "as-needed"]
+当基数为 10 时 强制不填写基数
+
+react/no-multi-comp
+单个文件只允许定义一个 react 组件
+同一个文件中，封装一些简单的无状态组件，有助于提升核心 jsx 可读性
+建议改为忽略无状态组件 'react/no-multi-comp': ['warn', { ignoreStateless: true }]
+
+no-underscore-dangle
+禁止标识符中有悬空下划线
+使用某些 sdk 以及和后端的交互定义中等情形下 不可避免
