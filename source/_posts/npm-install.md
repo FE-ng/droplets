@@ -61,11 +61,12 @@ npm update <packageName>
 3. 查看 package.json 中对应的语义版本规则
 4. 如果当前新版本符合语义规则，就更新，否则不更新
 
-远程版本是否较新是由 npm 模块仓库提供的信息  
-[查询服务网址](https://registry.npmjs.org/)
+远程版本是否较新是由[ npm 模块仓库](https://registry.npmjs.org/)提供的信息  
+`https://registry.npmjs.org/`这个网址后面跟上模块名，就会得到一个 JSON 对象，里面是该模块所有版本的信息。  
+比如，访问 [`https://registry.npmjs.org/react`](https://registry.npmjs.org/react),就会看到 react 模块所有版本的信息。
+registry 网址的模块名后面，还可以跟上版本号或者标签，用来查询某个更具体的版本信息
 
-这个网址后面跟上模块名，就会得到一个 JSON 对象，里面是该模块所有版本的信息。  
-比如，访问 https://registry.npmjs.org/react ,就会看到 react 模块所有版本的信息。
+在本地项目时我们可以通过以下命令对某个具体的包进行查询
 
 ```bash
 npm view react
@@ -75,19 +76,25 @@ npm show react
 npm v react
 ```
 
-registry 网址的模块名后面，还可以跟上版本号或者标签，用来查询某个具体版本的信息
-返回的 JSON 对象里面，有一个 dist.tarball 属性，是该版本压缩包的网址。
 <img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210624192834.png"  alt="效果图" />
-到这个网址下载压缩包，在本地解压，就得到了模块的源码。  
-npm install 和 npm update 命令，都是通过这种方式安装模块的。
 
-### 完整性
+返回的 JSON 对象里面，有一个 `dist.tarball` 属性，是该版本压缩包的网址。
+到这个网址下载压缩包，在本地解压，就得到了模块的源码。
+而 npm install 和 npm update 命令，都是通过这种方式安装模块的。
 
-在下载依赖包之前，我们一般就能拿到 npm 对该依赖包计算的 hash 值，例如我们执行 `npm v` 命令，紧跟 `tarball`(下载链接) 的就是 `shasum(hash) `：  
-`npm v react`
+### 校验完整性
+
+在下载依赖包之前，我们一般就能通过执行 `npm v` 命令拿到 npm 对该依赖包计算的 `hash` 值，紧跟 `tarball`(下载链接) 的就是 `shasum(hash) `：
+
+```bash
+npm v react
+```
+
 <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210719143926.png"  alt="效果图" />
 
-用户下载依赖包到本地后，需要确定在下载过程中没有出现错误，所以在下载完成之后需要在本地在计算一次文件的 hash 值，如果两个 hash 值是相同的，则确保下载的依赖是完整的，如果不同，则进行重新下载。
+用户下载依赖包到本地后，需要确定在下载过程中没有出现错误或被人篡改的情况，  
+因此需要在本地计算一次整个文件的 hash 值，再与给出`shasum`的进行比较.
+如果两个 hash 值是相同的，则确保下载的依赖是完整的，反之，则进行重新下载。
 
 ### 缓存
 
@@ -103,7 +110,9 @@ npm install 和 npm update 命令，都是通过这种方式安装模块的。
   用于存储 tar 包的 hash。
     <!-- <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210624201056.png"  alt="效果图" /> -->
     <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210719140714.png"  alt="效果图" />
-    npm 在执行安装时，可以根据 package-lock.json 中存储的 integrity、version、name 生成一个唯一的 key 对应到 index-v5 目录下的缓存记录，从而找到 tar 包的 hash，然后根据 hash 再去找缓存的 tar 包直接使用。
+    
+    npm 在执行安装时，可以根据 package-lock.json 中存储的 integrity、version、name 生成一个唯一的 key 
+    然后对应到 index-v5 目录下的缓存记录，从而找到 tar 包的 hash，最后根据 hash 找到缓存的 tar 包直接使用。
 
 我们可以找一个包在缓存目录下搜索测试一下，在 index-v5 搜索一下包路径：
 
@@ -155,10 +164,10 @@ grep https://registry.npmjs.org/base64-js/-/base64-js-1.5.1.tgz -r index-v5
 
 {% note info modern %}
 
-npm 在执行安装时，可以根据 package-lock.json 中存储的 integrity、version、name 生成一个唯一的 key 对应到 index-v5 目录下的缓存记录，  
- 从而找到 tar 包的 hash，然后根据 hash 再去找缓存的 tar 包直接使用。
-而这样的缓存策略是从 npm v5 版本开始的，在 npm v5 版本之前，每个缓存的模块在 ~/.npm 文件夹中以模块名的形式直接存储，
-储存结构是{cache}/{name}/{version}。
+npm 在执行安装时，可以根据 package-lock.json 中存储的 integrity、version、name 生成一个唯一的 key
+对应到 index-v5 目录下的缓存记录，从而找到 tar 包的 hash，然后根据 hash 再去找缓存的 tar 包直接使用。
+而这样的缓存策略是从 npm v5 版本开始的，在 npm v5 版本之前，
+每个缓存的模块在 ~/.npm 文件夹中以模块名的形式直接存储，储存结构是{cache}/{name}/{version}。
 
 {% endnote %}
 
@@ -174,7 +183,7 @@ npm 在执行安装时，可以根据 package-lock.json 中存储的 integrity�
 
 ## npm install 总结
 
-- 检查 .npmrc 文件
+- 检查 .npmrc 文件, 即配置文件
 - 无 lock 文件：
   - 从 npm 远程仓库获取包信息
   - 根据 package.json 构建依赖树，构建过程：
@@ -195,14 +204,19 @@ npm 在执行安装时，可以根据 package-lock.json 中存储的 integrity�
   - 生成 lock 文件
 - 有 lock 文件：
   - 检查 package.json 中的依赖版本是否和 package-lock.json 中的依赖有冲突。
-  - 如果没有冲突，直接跳过获取包信息、构建依赖树过程，开始在缓存中查找包信息，后续过程相同
+    - 如果没有冲突，直接跳过获取包信息、构建依赖树过程，开始在缓存中查找包信息，后续过程相同
+    - 有冲突时会按照无 lock 文件的情况进行安装
 
 上面的过程简要描述了 `npm install` 的大概过程，这个过程还包含了一些其他的操作，例如执行定义的一些生命周期函数，我们可以执行 `npm install package --timing=true --loglevel=verbose` 来查看某个包具体的安装流程和细节
 
+---
+
 <details>
-<summary><b>-----查看流程-----</b></summary>
+<summary><b>查看流程</b></summary>
 <img src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210624114733.png"  alt="效果图" />
 </details>
+
+---
 
 ## npm2
 
@@ -268,7 +282,7 @@ ignore 是一个纯 JS 模块，不依赖任何其他模块，而 buffer 又依�
 
 <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210625132259.png"  alt="效果图" />
 
-此时我们如果在模块中又依赖了 `base64-js@1.0.1 ` 即依赖了和 buffer (子依赖)中的 base64-js 一样只是版本不同;
+此时我们如果在模块中又依赖了 `base64-js@1.0.1 ` 即依赖了和 buffer (子依赖)中的 base64-js 一样只是版本和 Semver 语法不同;
 
 ```json
 {
@@ -285,13 +299,13 @@ ignore 是一个纯 JS 模块，不依赖任何其他模块，而 buffer 又依�
 }
 ```
 
-当安装到相同模块时(base64-js)，会判断已安装的模块版本是否符合新模块的版本范围，如果符合则跳过，不符合则在当前模块的 node_modules 下安装该模块。
+npm 的安装会有预处理,在预处理时遇到相同模块时(base64-js)，会判断已安装的模块版本是否符合新模块的版本范围，如果符合则跳过，不符合则在当前模块的 node_modules 下安装该模块。
 此时再执行 npm install 将会得到以下的结构
 
-<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210625132722.png"  alt="效果图" />
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210729161724.png"  alt="效果图" />
 
-此时我们模块 package-analysis 的依赖base64-js@1.0.1由于在 buffer 中也被依赖了 而且版本较低  
-此时 base64-js@1.0.1被提到根目录而 buffer 中的base64-js@1.0.2则被安装到了 buffer 的 node_module 中了
+此时我们模块 package-analysis 的依赖base64-js@1.0.1由于在 buffer 中也被依赖了,而且二者之间没有交集;  
+因此 base64-js@1.0.1会被安装在根目录,而 buffer 中依赖的base64-js@1.0.2则被安装到了 buffer 的 node_module 中了;
 
 所以如果我们在项目代码中引用了一个模块，模块查找流程如下：
 
@@ -302,7 +316,7 @@ ignore 是一个纯 JS 模块，不依赖任何其他模块，而 buffer 又依�
 5. 直到搜索到全局路径中的 node_modules
 
 假设我们又依赖了一个包 buffer2@^5.4.3，而它依赖了包 base64-js@1.0.3，则此时的安装结构是下面这样的：
-<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210625133706.png"  alt="效果图" />
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210729173707.png"  alt="效果图" />
 
 因此 npm 3.x 版本并未完全解决老版本的**模块冗余问题**，甚至还会带来新的问题。
 
@@ -311,9 +325,9 @@ ignore 是一个纯 JS 模块，不依赖任何其他模块，而 buffer 又依�
 决定 node_modules 的依赖结构：
 
 1. 先依赖 buffer：
-   <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210625133940.png"  alt="效果图" />
+   <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210729173804.png"  alt="效果图" />
 2. 先依赖 buffer2：
-   <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210625134115.png"  alt="效果图" />
+   <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210729173842.png"  alt="效果图" />
 
 另外，为了让开发者在安全的前提下使用最新的依赖包，我们在 package.json 通常只会锁定大版本，这意味着在某些依赖包小版本更新后，  
 同样可能造成依赖结构的改动，依赖结构的不确定性可能会给程序带来不可预知的问题。
@@ -321,12 +335,13 @@ ignore 是一个纯 JS 模块，不依赖任何其他模块，而 buffer 又依�
 ## package-lock.json 的作用
 
 为了解决 npm install 的不确定性问题(package.json 文件中的语义版本锁定，安装源也不固定)，  
-导致我们在协同开发和线上构建时，不同开发者 npm i 得到的依赖版本可能有一定差异的现象。
+导致我们在协同开发和线上构建时，不同开发者 `npm i` 得到的依赖版本可能有一定差异的现象。
 
-在 npm 5.x 版本新增了 package-lock.json 文件，而安装方式还沿用了 npm 3.x 的扁平化的方式。
+所以在 npm 5.x 版本新增了 package-lock.json 文件，而安装方式还沿用了 npm 3.x 的扁平化的方式。
 
-package-lock 是 package.json 中列出的每个依赖项的大型列表，应安装的特定版本，模块的位置（URI），  
-验证模块完整性的哈希，它需要的包列表 ，以及依赖项列表。
+package-lock 是 package.json 中列出的每个依赖项的大型列表，
+包含应安装的特定版本，模块的位置（URI）,验证模块完整性的哈希，以及依赖项列表等信息。
+
 我们看一个具体的例子
 <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210719112625.png"  alt="效果图" />
 
@@ -334,13 +349,15 @@ package-lock 是 package.json 中列出的每个依赖项的大型列表，应�
 2. lockfileVersion:
    lock 文件的版本在 npm7 中有了显著的改变
    - 没有值: 来自 NPM v5 之前版本的一个历史深远的 shrinkwrap 版本。
-   - 1: npm v5 and v6 执行得到的
-   - 2: npm v7 使用的 lockfile 版本，它向后兼容 v1 的 lockfiles。
-   - 3: npm v7 创建而成, 不再向后兼容.不维护 v6 的版本后就会在未来使用, 该文件将会被隐藏路径成为`node_modules/.package-lock.json`
-3. version: 指模块的版本 遵循 semver;
+   - lockfileVersion@1: npm v5 and v6 执行得到的
+   - lockfileVersion@2: npm v7 使用的 lockfile 版本，它向后兼容 v1 的 lockfiles。
+   - lockfileVersion@3: npm v7 创建而成, 不再向后兼容.不维护 v6 的版本后就会在未来使用, 该文件将会被隐藏路径成为`node_modules/.package-lock.json`
+3. version: 指模块的版本 遵循 semver 原则;
 4. resolved: 模块的下载地址
 5. integrity: 模块的 hash 值用于校验完整性
 6. requires: 依赖
+
+## 如何处理 package-lock.json
 
 对于是否将 package-lock.json 文件上传到远程仓库，也有许多有趣的讨论，  
 **[例如 package-lock.json 需要写进 .gitignore 吗？](https://www.zhihu.com/question/264560841)**
@@ -390,9 +407,10 @@ npm ci 是类似于 npm i 的命令。npm ci 与 npm i 主要的差异有：
 
 <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210628200407.png"  alt="效果图" />
 
-近期 组内的小伙伴有遇到如上的问题乍一看不止所云 但是提示却写的非常的明确 提取到 root 里面的 eslint 依赖是eslint@7.29.0  
-而内置的eslint-config-airbnb@18.2.1却希望宿主的 eslint 版本是^5.16.0 || ^6.8.0 || ^7.2.0;
-eslint-plugin-react-hooks@1.7.0希望宿主的 eslint 版本是^3.0.0-^6.0.0;
+近期,组内的小伙伴有遇到如上的问题乍一看不知所云,但是提示却写的非常的明确;
+提取到 root 里面的 eslint 依赖是eslint@7.29.0  
+而内置的 eslint-config-airbnb@18.2.1 却希望宿主的 eslint 版本是 ^5.16.0 || ^6.8.0 || ^7.2.0;
+eslint-plugin-react-hooks@1.7.0 希望宿主的 eslint 版本是 ^3.0.0-^6.0.0;
 二者产生了冲突从而无法建立依赖数报错;
 解决方式也写的比较明确 `npm install --force` 或者 npm `install --legacy-peer-deps `;
 
@@ -420,14 +438,18 @@ eslint-plugin-react-hooks@1.7.0希望宿主的 eslint 版本是^3.0.0-^6.0.0;
 使用 npm 7 并且在有 v1 的 lockfile 的项目中执行 npm install，则会把 lock file 文件的内容取代成 v2 的格式。
 如果想避免这种行为，可以通过执行 npm install --no-save
 
-### 自动安装 peer dependencies
+### 自动安装 peerDependencies
 
 但和上面提到过的问题息息相关的也就只有这个特性了;
-npm 7 中引入的一项新功能是自动安装 peer dependencies。在 npm 的之前版本（4-6）中，peer dependencies 冲突会有版本不兼容的警告，开发人员需要自己管理和安装 peerDependencies, 有冲突仍会安装依赖并不会抛出错误。但在 npm 7 中，新的 peer dependencies 可确保在 node_modules 树中 peerDependencies 的位置处或之上找到有效匹配的 peerDependencies。如果存在无法自动解决的依赖冲突，将会阻止安装。
+npm 7 中引入的一项新功能是自动安装 peerDependencies。在 npm 的之前版本（4-6）中，peerDependencies 冲突会有版本不兼容的警告，
+开发人员需要自己管理和安装 peerDependencies, 有冲突仍会安装依赖并不会抛出错误。
+但在 npm 7 中，新的 peerDependencies 可确保在 node_modules 树中 peerDependencies 的位置处或之上
+找到有效匹配的 peerDependencies。如果存在无法自动解决的依赖冲突，将会阻止安装。
 
-可以通过使--force 选项重新安装来绕过冲突，或者选择--legacy-peer-deps 选项 peer dependencies 的依赖关系（类似于 npm 版本 4-6）。
+可以通过使用 `--force` 选项重新安装来绕过冲突，或者选择 `--legacy-peer-deps` 选项处理 peerDependencies 的依赖关系（类似于 npm 版本 4-6）。
 
-由于许多包都依赖宽松的 peer dependencies 解析，npm 7 将打印警告并解决包依赖树中存在的大多数同级冲突，因此这些冲突不能手动处理。要在所有层级强制执行严格正确的 peer dependencies 依赖关系，请使用--strict-peer-deps 选项。
+由于许多包都依赖宽松的 peerDependencies 解析，npm 7 将打印警告并解决包依赖树中存在的大多数同级冲突，
+因此这些冲突不能手动处理。要在所有层级强制执行严格正确的 peerDependencies 依赖关系，使用`--strict-peer-deps` 选项。
 
 ### 完全支持 node_modules 内的符号链接
 
@@ -568,3 +590,4 @@ https://github.com/rogeriochaves/npm-force-resolutions/issues
 https://github.blog/2020-10-13-presenting-v7-0-0-of-the-npm-cli/
 [npm docs](https://docs.npmjs.com/)
 https://jishuin.proginn.com/p/763bfbd3bcff
+http://www.conardli.top/blog/article/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%EF%BC%88%E4%BA%8C%EF%BC%89package.json%E7%9F%A5%E5%A4%9A%E5%B0%91%EF%BC%9F.html
