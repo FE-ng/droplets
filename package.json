@@ -7,7 +7,8 @@
   },
   "scripts": {
     "start": "hexo server -p $PORT",
-    "build": "hexo generate"
+    "build": "hexo generate",
+    "cm": "git-cz"
   },
   "dependencies": {
     "gulp-html-minifier-terser": "^6.0.1",
