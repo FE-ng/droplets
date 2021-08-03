@@ -70,9 +70,7 @@ danger 提示块标签
     </p>
 </div>
 
-https://www.antmoe.com/posts/3b43914f/
-
-(可以参考这里：HEXO)[https://www.ofind.cn/blog/HEXO/HEXO%E4%B8%8B%E7%9A%84%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE%E6%8B%93%E5%B1%95%E4%BF%AE%E6%94%B9.html]下的语法高亮拓展修改，具体而言，Markdown 的代码段的语法是这样的。
+[可以参考这里：HEXO](https://www.ofind.cn/blog/HEXO/HEXO%E4%B8%8B%E7%9A%84%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE%E6%8B%93%E5%B1%95%E4%BF%AE%E6%94%B9.html)下的语法高亮拓展修改，具体而言，Markdown 的代码段的语法是这样的。
 格式：
 
 ```[language] [:title] [lang:language] [line_number:(true|false)] [first_line:number] [mark:#,#-#] [diff:true|false] [url:http...]
@@ -91,6 +89,8 @@ https://zhuanlan.zhihu.com/p/35668237
 https://sixdegree.github.io/2016/01/02/Hexo.html
 https://vincentqin.tech/posts/build-a-website-using-hexo/
 [github 首页装饰](https://cxvh.com/2021/02/14/git/READEME/)
+
+[hexo markdown 多种外挂标签的使用](https://www.antmoe.com/posts/3b43914f/)
 
 https://www.antmoe.com/posts/6081157f/
 
