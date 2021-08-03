@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-31 21:00:06
- * @LastEditTime: 2021-08-02 19:19:55
+ * @LastEditTime: 2021-08-03 10:44:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_drafts/tips.md
@@ -23,7 +23,7 @@
    - 单车
 3. 衣物等随身物品
 4. 入职前酒店确定,机票时间确定,快递物品确定
-5. 理发
+5. [x]理发
 6. [x]休假时间确定 剩余 4 天
 7. [x]确定吃饭地点 时间 8.8 ---->
 8. []文件处理打包 云储存
