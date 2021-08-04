@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-31 21:00:06
- * @LastEditTime: 2021-08-03 17:05:27
+ * @LastEditTime: 2021-08-04 20:55:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_drafts/tips.md
@@ -39,11 +39,15 @@
 14. [x]话费报销
 15. 邮寄地 回家或者杭州 fn
 
+[西湖区五联西苑 个人朝南好房转租 仅需 1500，独门独户带独立.](https://www.douban.com/group/topic/240645340/) 距离很久步行 15min
+[房东直租文三西路单间独卫，月付 1600 元／月，押一付一，无中...](https://www.douban.com/group/topic/240613388/)
+
 ---
 
 1.  - **需求**:【【基础数据】操作日志记录优化】
       https://www.tapd.cn/35989218/prong/stories/view/1135989218001033481;
     - **进度**: 完成开发公用组件 LogModal;
+    - **分支名**: dev-1.2.4-logOptimize_lf
     - **使用**: 参考 BOMManage/modules/FormTable 中的引用和使用方式;
     - **特点**: 已经和后端瑞豪确定日志 modal 的入参(operateTableId,operateTableName,),出参(表格数据)都保持一致;
     - **注意事项**: 由于供应商的需求(需求 2)先开发上线, 未使用  该需求开发  的组件, 因此后续会需要处理供应商 SupplierManage 中的日志 modal;
@@ -51,22 +55,24 @@
 2.  - **需求**:【【基础数据】供应商主数据可视化】
       https://www.tapd.cn/35989218/prong/stories/view/1135989218001032629
     - **进度**: 自测完成,qa 测试中
+    - **分支名**: dev-v1.1.2-supplier​Manage_lf
     - **注意事项**: 暂无
 
 3.  - **需求**:【【基础数据】bom 商品导入时支持虚拟 bom 商品】
       https://www.tapd.cn/35989218/prong/stories/view/1135989218001033751
     - **进度**: 开发中
 
-4.  - **需求**:【【配送订单管理】增加‘强制下发’按钮功能的需求】
-      https://www.tapd.cn/35989218/prong/stories/view/1135989218001030879
-    - **进度**: 需求被挂起
+4.  - **需求**:【【系统能力搭建】-新增标签管理模块】
+      https://www.tapd.cn/53174460/prong/stories/view/1153174460001031150
+    - **进度**: uat 中
+    - **分支名**:dev-v1.1.3-labelManage_lf
+    - **注意事项**: 需求的实现有点费神, 后续的更改和需求增加请注意查看对应需求中的代码注释;
 
 5.  - **需求**:【【DataHub 系统优化】数据库管理-数据库表的数据表增加中文名】
       https://www.tapd.cn/53174460/prong/stories/view/1153174460001033741
-      - **进度**: 与后端王宇坤多次沟通未果, 对方无回复,可能很忙
-      - **注意事项**: 表格增加一个字段, 和后端沟通之后确定返回的值增加一个即可
-
-6.  - **需求**:【【系统能力搭建】-新增标签管理模块】
-      https://www.tapd.cn/53174460/prong/stories/view/1153174460001031150
     - **进度**: uat 中
-    - **注意事项**: 需求的实现有点费神, 后续的更改和需求增加请注意查看对应需求中的代码注释;
+    - **注意事项**: 沟通后前端没做更改,后端在 data_table_name 字段里拼接了表格中文名
+
+6.  - **需求**:【【配送订单管理】增加‘强制下发’按钮功能的需求】
+      https://www.tapd.cn/35989218/prong/stories/view/1135989218001030879
+    - **进度**: 需求被挂起
