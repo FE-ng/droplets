@@ -160,3 +160,6 @@ sudo spctl --master-disable
   可从系统菜单栏图标快速切换 hosts
 
 ## [部分软件下载地址推荐 xclient](https://xclient.info/)
+
+后续更新参考内容
+[命令行](https://juejin.cn/post/6966606708848197645)

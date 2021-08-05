@@ -53,6 +53,9 @@ tags:
 
 [西湖区五联西苑 个人朝南好房转租 仅需 1500，独门独户带独立.](https://www.douban.com/group/topic/240645340/) 距离很久步行 15min
 [房东直租文三西路单间独卫，月付 1600 元／月，押一付一，无中...](https://www.douban.com/group/topic/240613388/)
+https://www.douban.com/group/topic/240673012/
+[个人找室友】西湖区 紫金庭园 朝南两个大卧室 2200/月]https://www.douban.com/group/topic/240577251/
+房东 整租 浙商财富中心 蚂蚁金服 附近 3 楼 一室一厨一卫精装套房 2000 元 https://www.douban.com/group/topic/240879501/
 
 ---
 
