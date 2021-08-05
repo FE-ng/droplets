@@ -1,7 +1,19 @@
+---
+title: Array.from()
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210623160309.png
+date: 2021-06-20 13:23:12
+categories:
+  - javascript
+tags:
+  - Array.from()
+  - api
+  - javascript
+---
+
 <!--
  * @Author: your name
  * @Date: 2021-07-31 21:00:06
- * @LastEditTime: 2021-08-05 10:53:25
+ * @LastEditTime: 2021-08-05 15:16:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_drafts/tips.md
@@ -30,14 +42,14 @@
 6. [x]休假时间确定 剩余 4 天
 7. [x]确定吃饭地点 时间 8.8 ---->
 8. []文件处理打包 云储存
-9. 个人相关资料备份
+9. [x]个人相关资料备份
 
 10. 倒计时 2 周的周报 1week
 11. 杭州租房形式确定
 12. 快速适应杭州新环境
 13. 确定五险一金交付地
 14. [x]话费报销
-15. 邮寄地 回家或者杭州 fn
+15. [x]邮寄地 回家或者杭州 fn ---> 杭州
 
 [西湖区五联西苑 个人朝南好房转租 仅需 1500，独门独户带独立.](https://www.douban.com/group/topic/240645340/) 距离很久步行 15min
 [房东直租文三西路单间独卫，月付 1600 元／月，押一付一，无中...](https://www.douban.com/group/topic/240613388/)
@@ -46,7 +58,7 @@
 
 1.  - **需求**:【【基础数据】操作日志记录优化】
       https://www.tapd.cn/35989218/prong/stories/view/1135989218001033481;
-    - **进度**: 完成开发公用组件 LogModal;
+    - **进度**: 完成开发公用组件 LogModal; 后端(瑞豪)联调时间为 8.18
     - **分支名**: dev-1.2.4-logOptimize_lf
     - **使用**: 参考 BOMManage/modules/FormTable 中的引用和使用方式;
     - **特点**: 已经和后端瑞豪确定日志 modal 的入参(operateTableId,operateTableName,),出参(表格数据)都保持一致;
@@ -54,19 +66,19 @@
 
 2.  - **需求**:【【基础数据】供应商主数据可视化】
       https://www.tapd.cn/35989218/prong/stories/view/1135989218001032629
-    - **进度**: 自测完成,qa 测试中
+    - **进度**: uat
     - **分支名**: dev-v1.1.2-supplier​Manage_lf
     - **注意事项**: 暂无
 
 3.  - **需求**:【【基础数据】bom 商品导入时支持虚拟 bom 商品】
       https://www.tapd.cn/35989218/prong/stories/view/1135989218001033751
-    - **进度**: 开发中
+    - **进度**: 开发中 后端(瑞豪)联调时间为 8.23;
     - **分支名**:dev-v1.2.4-virtualBOM_lf
-    - **注意事项**: 需求中的日志部分,划分到【【基础数据】操作日志记录优化】中;
+    - **注意事项**:更改了 bom 导入模板(子商品数目字体变红) 需求中的日志部分,划分到【【基础数据】操作日志记录优化】中;
 
 4.  - **需求**:【【系统能力搭建】-新增标签管理模块】
       https://www.tapd.cn/53174460/prong/stories/view/1153174460001031150
-    - **进度**: uat 中
+    - **进度**: uat,online
     - **分支名**:dev-v1.1.3-labelManage_lf
     - **注意事项**: 需求的实现有点费神, 后续的更改和需求增加请注意查看对应需求中的代码注释;
 
