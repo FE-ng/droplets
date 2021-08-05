@@ -91,7 +91,7 @@ https://vincentqin.tech/posts/build-a-website-using-hexo/
 [github 首页装饰](https://cxvh.com/2021/02/14/git/READEME/)
 
 [hexo markdown 多种外挂标签的使用](https://www.antmoe.com/posts/3b43914f/)
-
+[hexo 部分插件介绍](https://loafing.cn/posts/hexo-tags.html)
 https://www.antmoe.com/posts/6081157f/
 
 https://chuchendjs.github.io/posts/BY-MOchange/
