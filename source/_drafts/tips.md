@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-31 21:00:06
- * @LastEditTime: 2021-08-04 20:55:15
+ * @LastEditTime: 2021-08-05 10:53:25
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_drafts/tips.md
@@ -61,6 +61,8 @@
 3.  - **需求**:【【基础数据】bom 商品导入时支持虚拟 bom 商品】
       https://www.tapd.cn/35989218/prong/stories/view/1135989218001033751
     - **进度**: 开发中
+    - **分支名**:dev-v1.2.4-virtualBOM_lf
+    - **注意事项**: 需求中的日志部分,划分到【【基础数据】操作日志记录优化】中;
 
 4.  - **需求**:【【系统能力搭建】-新增标签管理模块】
       https://www.tapd.cn/53174460/prong/stories/view/1153174460001031150
@@ -71,8 +73,10 @@
 5.  - **需求**:【【DataHub 系统优化】数据库管理-数据库表的数据表增加中文名】
       https://www.tapd.cn/53174460/prong/stories/view/1153174460001033741
     - **进度**: uat 中
+    - **分支名**: 无
     - **注意事项**: 沟通后前端没做更改,后端在 data_table_name 字段里拼接了表格中文名
 
 6.  - **需求**:【【配送订单管理】增加‘强制下发’按钮功能的需求】
       https://www.tapd.cn/35989218/prong/stories/view/1135989218001030879
     - **进度**: 需求被挂起
+    - **分支名**: 无
