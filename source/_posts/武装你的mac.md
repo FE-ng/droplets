@@ -163,3 +163,4 @@ sudo spctl --master-disable
 
 后续更新参考内容
 [命令行](https://juejin.cn/post/6966606708848197645)
+https://sspai.com/post/63241
