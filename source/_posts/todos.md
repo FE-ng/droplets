@@ -39,8 +39,8 @@ tags:
 24. > ~~github 个人首页装饰(数据统计 仓库)~~ 待更换样式
 25. > ~~icon 除黑白边~~
 26. > vscode 插件补充
-27. > github action CI/CD [自动化发布 npm 包及生成 Github Changelog
-    > ](https://banyudu.com/posts/auto_publish_npm_and_generate_github_changelog.882513)
+27. > github action CI/CD [自动化发布 npm 包及生成 Github Changelog](https://banyudu.com/posts/auto_publish_npm_and_generate_github_changelog.882513)
+28.
 
 defaults write com.dteoh.SlowQuitApps whitelist -array-add com.microsoft.VSCode
 
@@ -247,3 +247,5 @@ https://hejialianghe.gitee.io/computerNetwork/tools.html#_5-5-1-%E7%BD%91%E7%BB%
 <img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210723173034.png"  alt="效果图" />
 
 https://sudos.tools/markdown-to-react
+
+[职业规划理解篇](https://mp.weixin.qq.com/s/c6honI0cBIYar9ZgMkcB7Q)
