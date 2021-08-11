@@ -73,6 +73,9 @@ danger 提示块标签
 [可以参考这里：HEXO](https://www.ofind.cn/blog/HEXO/HEXO%E4%B8%8B%E7%9A%84%E8%AF%AD%E6%B3%95%E9%AB%98%E4%BA%AE%E6%8B%93%E5%B1%95%E4%BF%AE%E6%94%B9.html)下的语法高亮拓展修改，具体而言，Markdown 的代码段的语法是这样的。
 格式：
 
+picGo 图床设置
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210811112033.png"  alt="效果图" />
+
 ```[language] [:title] [lang:language] [line_number:(true|false)] [first_line:number] [mark:#,#-#] [diff:true|false] [url:http...]
        code snippet
 ```
