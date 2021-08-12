@@ -71,7 +71,7 @@ git branch | grep "fix" | xargs git branch -D
 - git fetch -p origin | git branch --merged | xargs git branch -d | xargs git push origin -d
 
 git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
-
+`git branch | grep "fix" | xargs git branch -D`
 修改分支名，实现无缝衔接
 开发中的大佬都是拥有极快手速的人，建了个分支一不小心打错了某个字母或者两个字母打反了，可能就与本意存在较大误差了，Git 提供一种已经拉取了分支，在上面开发了不少的内容，但后来发现原本拉的分支名字就有问题的修复方法。
 
@@ -249,3 +249,57 @@ https://hejialianghe.gitee.io/computerNetwork/tools.html#_5-5-1-%E7%BD%91%E7%BB%
 https://sudos.tools/markdown-to-react
 
 [职业规划理解篇](https://mp.weixin.qq.com/s/c6honI0cBIYar9ZgMkcB7Q)
+
+[iptv](https://iptv-org.github.io/iptv/countries/cn.m3u)
+[clash](https://sspool.herokuapp.com/)
+
+<!--
+ * @Author: your name
+ * @Date: 2021-03-24 17:31:13
+ * @LastEditTime: 2021-03-25 16:46:13
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /starry-river/docs/lerna.md
+-->
+
+# Monorepo VS MultiRepo
+
+https://juejin.cn/post/6944877410827370504
+
+# 管理模式
+
+使用 lerna 管理项目时，可以选择两种模式。
+
+- 默认的为固定模式(Fixed mode)，当使用 lerna init 命令初始化项目时，就默认为固定模式，也可以使用 lerna init --independent 命令初始化项目，这个时候就为独立模式(Independent mode)。
+  固定模式中，packages 下的所有包共用一个版本号(version)，会自动将所有的包绑定到一个版本号上(该版本号也就是 lerna.json 中的 version 字段)，所以任意一个包发生了更新，这个共用的版本号就会发生改变。
+- 独立模式允许每一个包有一个独立的版本号，在使用 lerna publish 命令时，可以为每个包单独制定具体的操作，同时可以只更新某一个包的版本号。此种模式时，lerna.json 中的 version 字段指定为 independent 即可。
+
+## lerna clean
+
+删除所有包的 node_modules 目录
+
+## lerna changed
+
+列出下次发版 lerna publish 要更新的包。
+
+# lerna publish
+
+lerna bootstrap --hoist
+
+会打 tag，上传 git,上传 npm。
+
+组件库问题
+
+- node 持续(错误时不中断)
+- 快速搭建组件脚本
+- 文档完善
+
+- 不同 package 中相同命名的组件问题 √
+- install 脚本需要优化
+- 导航自定义 √
+
+-
+- ts 使用问题 √
+- lerna 的使用 √
+- lint-stage 失效的问题 原因: husky 的版本 v4 到 v5 或者 v6 时配置的方有 breaking change √
+- 增加 stylelint 并支持保存自动修改可以修改的部分 √
