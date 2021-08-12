@@ -303,3 +303,57 @@ lerna bootstrap --hoist
 - lerna 的使用 √
 - lint-stage 失效的问题 原因: husky 的版本 v4 到 v5 或者 v6 时配置的方有 breaking change √
 - 增加 stylelint 并支持保存自动修改可以修改的部分 √
+
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210812170727.png"  alt="效果图" />
+
+变基 rebase （onto） merge 快进（fast-forward， --no--ff）三方合并（哪三方） 如果远程变基了怎么处理
+https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA
+三棵树 reset checkout git checkout --orphan
+https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86
+revert
+rerere？
+四种文件状态
+git 文件夹目录存储的东西以及意义
+git fetch || git pull
+误删除 reflog
+git 小游戏https://learngitbranching.js.org/?NODEMO=&locale=zh_CN
+
+https://juejin.im/post/6844904019245137927#heading-7
+https://juejin.im/post/6844903986839945229 内部文件
+
+# Git 2.0 以下版本
+
+#只作用于文件的新增和修改
+$ git add .  
+#只作用于文件的修改和删除
+$ gti add -u #作用于文件的增删改
+$ git add -A
+
+# Git 2.0 版本
+
+$ git add . 等价于 $ git add -A
+
+git merge https://juejin.im/post/6844904191203213326#heading-3
+通过 File->Preferences->Settings 显示隐藏文件.git
+
+https://blog.cti.app/archives/1344
+
+底层命令建立一个 commit
+https://juejin.im/post/6844904053370159112
+索引(暂存区)根据图示，我理解是一个中间态的 tree；如果没有暂存区的话，每次的改动 add 之后 git 都需要在本地仓库内生成一个新的 tree，应该是比较混乱和高成本的。有了这个暂存区，每次改动并 add 之后，只更新这个中间态的 tree，然后等你确认好了之后 commit，这时候才真正的产生一个 tree，并在此基础上产生 commit。有点类似虚拟 DOM 与真实 DOM 的感觉。个人理解，欢迎讨论。
+内部对象 https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1
+https://blog.coding.net/blog/principle-of-git
+
+解析.git 文件夹，深入了解 git 内部原理https://juejin.im/post/6844903986839945229#heading-0
+https://stackoverflow.com/questions/18137175/in-git-what-is-the-difference-between-origin-master-vs-origin-master
+git blame https://segmentfault.com/a/1190000004446181
+http://www.ruanyifeng.com/blog/2018/12/git-bisect.html
+.git/refs https://jingsam.github.io/2018/10/12/git-reference.html
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210812171054.png"  alt="效果图" />
+git fsck --lost-found
+find .git/objects -type f | xargs ls -lt | sed 3q
+查找.git/objects 文件夹下的普通文件 按照时间排序后 打印在终端里 sed 3q 是打印 3 行 sed 100q 是打印 100 行
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210812171127.png"  alt="效果图" />
+
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210812171204.png"  alt="效果图" />
+<img class="image800" src="https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210812171220.png"  alt="效果图" />
