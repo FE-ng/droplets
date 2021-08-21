@@ -40,14 +40,13 @@ tags:
 25. > ~~icon 除黑白边~~
 26. > vscode 插件补充
 27. > github action CI/CD [自动化发布 npm 包及生成 Github Changelog](https://banyudu.com/posts/auto_publish_npm_and_generate_github_changelog.882513)
-28.
-
-defaults write com.dteoh.SlowQuitApps whitelist -array-add com.microsoft.VSCode
+28. (SlowQuitApps)[https://sspai.com/post/44687]
+    defaults write com.dteoh.SlowQuitApps whitelist -array-add com.microsoft.VSCode
 
 defaults read com.dteoh.SlowQuitApps whitelist
+killall SlowQuitApps
 
 alt + s 开关 chrome vim
-killall SlowQuitApps
 
 { "key": "cmd+q", "command": "-workbench.action.quit", "when": "isMac" },
 { "key": "cmd+q cmd+q", "command": "workbench.action.quit", "when": "isMac" },

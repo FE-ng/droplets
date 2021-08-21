@@ -57,6 +57,30 @@ sudo spctl --master-disable
 
 ![效果图](https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210507114206.png)
 
+### 环境搭建设置
+
+brew 安装
+git（mac 自带） with github
+ssh 连接的几个注意点（）
+
+-
+- 默认在没有 \_hosts 的时候会进行一次询问
+  ()[https://www.liaoxuefeng.com/discuss/969956160874304/1201174503408992]
+  cd ~/.ssh/
+
+```
+vi config
+如果不是默认的id_rsa则需要在建立config并且在其中明确自己的私钥名称
+    Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github_rsa
+```
+
+npm install -g commitizen
+npm install -g yarn
+npm install -g pnpm
+
 ### 常用快捷键 (可自行摸索)
 
 <kbd>command</kbd> + <kbd>option</kbd> + <kbd>D</kbd> : 能够控制程序坞与菜单栏是否常驻
@@ -164,3 +188,12 @@ sudo spctl --master-disable
 后续更新参考内容
 [命令行](https://juejin.cn/post/6966606708848197645)
 https://sspai.com/post/63241
+
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+(brew 本地源)[https://www.zhihu.com/question/35928898]
+
+依赖注入
+DIP：
+Ioc：
+DI：
+依赖注入取缔 import
