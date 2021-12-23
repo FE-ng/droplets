@@ -1,3 +1,14 @@
+---
+title: iTerm2 配置
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210623160424.png
+date: 2021-08-19 15:08:33
+categories:
+  - 配置
+tags:
+  - iTerm2
+---
+
+```json
 {
   "Profiles": [
     {
@@ -313,3 +324,4 @@
     }
   ]
 }
+```

@@ -1,3 +1,13 @@
+---
+title: JS question
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210625162500.png
+date: 2021-07-29 14:12:19
+categories:
+  - javascript
+tags:
+  - javascript
+---
+
 <!--
  * @Author: your name
  * @Date: 2021-07-29 13:55:57
