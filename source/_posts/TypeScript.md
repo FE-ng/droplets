@@ -1,6 +1,6 @@
 ---
 title: TypeScript
-cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/20210611140112.png
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/202112231519723.png
 date: 2021-12-14 17:31:12
 categories:
   - 推荐

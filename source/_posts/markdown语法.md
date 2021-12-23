@@ -2,12 +2,13 @@
 title: markdown语法
 date: 2021-07-10 01:05:37
 tags: md
+cover: https://cdn.jsdelivr.net/gh/FE-ng/picGo/blog/202112231517802.png
 ---
 
 <!--
  * @Author: your name
  * @Date: 2021-07-10 01:05:37
- * @LastEditTime: 2021-07-10 01:09:07
+ * @LastEditTime: 2021-12-23 15:18:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /droplets/source/_posts/markdown语法.md
@@ -16,9 +17,8 @@ tags: md
 # markdown 常用语法介绍
 
 <div align="center">
-<h1>
-    <img alt="MARKDOWN SYNTAX" src="https://cloud.githubusercontent.com/assets/5456665/13505154/0ca9ddf6-e1a2-11e5-9408-a8cfc6b493f0.png" width="350" height="70"></img>
-</h1>
+
+<img alt="MARKDOWN SYNTAX" src="https://cloud.githubusercontent.com/assets/5456665/13505154/0ca9ddf6-e1a2-11e5-9408-a8cfc6b493f0.png" width="350" height="70"></img>
 
 | <a href="#header">HEADER</a>
 | <a href="#emphasis">EMPHASIS</a>
